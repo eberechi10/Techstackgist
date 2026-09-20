@@ -66,24 +66,24 @@ export const Navbar: React.FC<NavbarProps> = ({
             onNavigate('home');
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
-          className="flex items-center gap-2.5 text-left group cursor-pointer focus:outline-none"
+          className="flex items-center gap-2.5 text-left group cursor-pointer focus:outline-none shrink-0"
         >
-          <div className="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-extrabold tracking-tight text-lg shadow-xs group-hover:bg-blue-600 transition-colors">
+          <div className="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-extrabold tracking-tight text-lg shadow-xs group-hover:bg-blue-600 transition-colors shrink-0">
             <span className="text-white">TSG</span>
           </div>
           <div className="flex flex-col">
-            <span className="font-extrabold text-slate-900 text-lg leading-tight tracking-tight flex items-center gap-1.5">
+            <span className="font-extrabold text-slate-900 text-lg leading-tight tracking-tight flex items-center gap-1.5 whitespace-nowrap">
               Techstackgist
               <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
             </span>
-            <span className="text-[10px] font-semibold tracking-wider uppercase text-slate-500">
+            <span className="text-[10px] font-semibold tracking-wider uppercase text-slate-500 whitespace-nowrap">
               African Tech Platform
             </span>
           </div>
         </button>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+        <nav className="hidden lg:flex items-center gap-1 xl:gap-2 shrink-0">
           {navItems.map((item) => {
             const isActive = currentPage === item.id;
             return (
@@ -94,7 +94,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onNavigate(item.id);
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className={`px-3.5 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer ${
+                className={`px-3 py-2 xl:px-3.5 rounded-lg text-sm font-medium transition-all cursor-pointer whitespace-nowrap ${
                   isActive 
                     ? 'text-blue-600 bg-blue-50/80 font-semibold' 
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70'
@@ -107,37 +107,37 @@ export const Navbar: React.FC<NavbarProps> = ({
         </nav>
 
         {/* Desktop Right CTA Buttons */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-2 xl:gap-3 shrink-0">
           <button
             id="nav-explore-talent-btn"
             onClick={onOpenTalentExplore}
-            className="px-4 py-2 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors cursor-pointer"
+            className="px-3 xl:px-4 py-2 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors cursor-pointer whitespace-nowrap shrink-0"
           >
             Explore Talent
           </button>
           <button
             id="nav-hire-talent-btn"
             onClick={onOpenHireModal}
-            className="inline-flex items-center gap-2 px-4.5 py-2.5 rounded-xl bg-slate-900 hover:bg-blue-600 text-white text-sm font-semibold shadow-xs transition-all duration-200 hover:shadow-blue-500/20 hover:shadow-md cursor-pointer"
+            className="inline-flex items-center gap-2 px-3.5 xl:px-4.5 py-2.5 rounded-xl bg-slate-900 hover:bg-blue-600 text-white text-sm font-semibold shadow-xs transition-all duration-200 hover:shadow-blue-500/20 hover:shadow-md cursor-pointer whitespace-nowrap shrink-0"
           >
-            <span>Hire Tech Talent</span>
-            <ArrowUpRight className="w-4 h-4 opacity-80" />
+            <span className="whitespace-nowrap">Hire Tech Talent</span>
+            <ArrowUpRight className="w-4 h-4 opacity-80 shrink-0" />
           </button>
         </div>
 
         {/* Mobile Hamburger Toggle */}
-        <div className="flex md:hidden items-center gap-2">
+        <div className="flex md:hidden items-center gap-2 shrink-0">
           <button
             id="mobile-hire-btn"
             onClick={onOpenHireModal}
-            className="px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-semibold"
+            className="px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-semibold whitespace-nowrap"
           >
             Hire Talent
           </button>
           <button
             id="mobile-menu-toggle-btn"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg text-slate-700 hover:bg-slate-100 focus:outline-none"
+            className="p-2 rounded-lg text-slate-700 hover:bg-slate-100 focus:outline-none shrink-0"
             aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
