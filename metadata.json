@@ -1,0 +1,7 @@
+{
+  "name": "Techstackgist",
+  "description": "African technology platform connecting people and businesses with digital products, professional services, practical education, and vetted tech talent.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
