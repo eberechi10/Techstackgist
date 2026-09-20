@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useSEO } from '../utils/seo';
 import { TalentProfile } from '../types';
 import { TALENT_PROFILES } from '../data/mockData';
 import { 
@@ -23,6 +24,13 @@ export const TalentPage: React.FC<TalentPageProps> = ({
   onOpenHireModal,
   onOpenTalentDetail
 }) => {
+  useSEO({
+    title: 'Hire Top African Tech Talent | Vetted Remote Engineers – Techstackgist',
+    description: 'Discover and hire pre-vetted African software engineers, AI developers, DevOps specialists, and UI/UX designers ready to integrate with global teams.',
+    canonicalPath: '/talent',
+    keywords: ['hire African engineers', 'remote software developers Africa', 'vetted tech talent', 'African UI/UX designers', 'AI engineers Africa']
+  });
+
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [selectedCountry, setSelectedCountry] = useState<string>('All');

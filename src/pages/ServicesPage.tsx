@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSEO } from '../utils/seo';
 import { ServiceItem } from '../types';
 import { SERVICES } from '../data/mockData';
 import { 
@@ -19,6 +20,13 @@ interface ServicesPageProps {
 }
 
 export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenStartProject }) => {
+  useSEO({
+    title: 'Enterprise Software Solutions & Product Engineering | Techstackgist',
+    description: 'End-to-end product engineering, cloud migrations, AI integrations, and digital transformation services delivered by high-caliber African engineering teams.',
+    canonicalPath: '/services',
+    keywords: ['software development Africa', 'custom web applications', 'cloud migrations Nigeria', 'AI integration services', 'dedicated engineering teams']
+  });
+
   // Interactive scope estimator states
   const [selectedServices, setSelectedServices] = useState<string[]>(['Web Development']);
   const [teamSize, setTeamSize] = useState<'Dedicated Squad' | 'Specialist Pair' | 'Single Lead'>('Specialist Pair');

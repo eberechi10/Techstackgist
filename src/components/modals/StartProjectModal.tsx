@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ServiceItem } from '../../types';
 import { X, CheckCircle2, Code2, Send, Clock, Sparkles, Mail, ExternalLink, Copy, Loader2, AlertCircle } from 'lucide-react';
-import { PRIMARY_CONTACT, submitEmailForm, SendEmailResult } from '../../utils/email';
+import { PRIMARY_CONTACT, submitEmailForm, SendEmailResult, FORMSUBMIT_ACTION } from '../../utils/email';
 
 interface StartProjectModalProps {
   isOpen: boolean;
@@ -183,7 +183,7 @@ Phone & WhatsApp Support: ${PRIMARY_CONTACT.phone}`;
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="p-6 space-y-4">
+          <form action={FORMSUBMIT_ACTION} method="POST" onSubmit={handleSubmit} className="p-6 space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">

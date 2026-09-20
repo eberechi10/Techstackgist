@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSEO } from '../utils/seo';
 import { 
   ShieldCheck, 
   Globe, 
@@ -19,6 +20,13 @@ interface AboutPageProps {
 }
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenHireModal }) => {
+  useSEO({
+    title: 'About Techstackgist | Empowering African Innovation & Global Tech',
+    description: 'Learn about Techstackgist\'s mission to bridge the global technology talent deficit by equipping and elevating Africa\'s brightest software engineers.',
+    canonicalPath: '/about',
+    keywords: ['about Techstackgist', 'African tech ecosystem', 'Ebetech Digital Solutions', 'African tech founders', 'African engineers']
+  });
+
   return (
     <div id="about-page-container" className="pt-28 pb-20 w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

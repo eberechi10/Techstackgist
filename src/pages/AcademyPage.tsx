@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSEO } from '../utils/seo';
 import { Course } from '../types';
 import { COURSES } from '../data/mockData';
 import { 
@@ -20,6 +21,13 @@ interface AcademyPageProps {
 }
 
 export const AcademyPage: React.FC<AcademyPageProps> = ({ onOpenCourseEnroll }) => {
+  useSEO({
+    title: 'Techstackgist Academy | Practical Tech Training & Industry Bootcamps',
+    description: 'Upskill with hands-on bootcamps in full-stack software engineering, data science, AI & machine learning, cloud architecture, and cybersecurity.',
+    canonicalPath: '/academy',
+    keywords: ['African tech bootcamps', 'software engineering training Nigeria', 'learn web development Africa', 'data science courses Africa', 'tech careers']
+  });
+
   const [selectedCourse, setSelectedCourse] = useState<Course>(COURSES[0]);
 
   return (

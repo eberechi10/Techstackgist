@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
+import { useSEO } from '../utils/seo';
 import { PRODUCTS } from '../data/mockData';
 import { Box, CheckCircle2, ArrowUpRight, Sparkles, Download, ExternalLink } from 'lucide-react';
 
 export const ProductsPage: React.FC = () => {
+  useSEO({
+    title: 'Digital Products & Developer Accelerators | Techstackgist',
+    description: 'Explore innovative digital products built by Techstackgist, including AfriRemotely, EduSkill Africa, AgriConnect, and HealthPulse Africa.',
+    canonicalPath: '/products',
+    keywords: ['African SaaS products', 'developer kits Africa', 'AfriRemotely', 'African tech software', 'digital tools Nigeria']
+  });
+
   const [activeFilter, setActiveFilter] = useState<string>('All');
   const categories = ['All', 'SaaS Products', 'Digital Tools', 'Templates', 'Educational Resources', 'Business Tools'];
 

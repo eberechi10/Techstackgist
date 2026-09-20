@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSEO } from '../utils/seo';
 import { 
   Building2, 
   CheckCircle2, 
@@ -17,6 +18,13 @@ interface CompaniesPageProps {
 }
 
 export const CompaniesPage: React.FC<CompaniesPageProps> = ({ onOpenHireModal }) => {
+  useSEO({
+    title: 'Hire & Scale Engineering Teams in Africa | Techstackgist for Enterprise',
+    description: 'Global companies partner with Techstackgist for compliant hiring, employer-of-record services, payroll, and high-performance remote engineering pods in Africa.',
+    canonicalPath: '/companies',
+    keywords: ['hire remote engineers Africa', 'tech talent recruitment Africa', 'EOR Africa tech', 'remote engineering pods Nigeria', 'African developers for hire']
+  });
+
   return (
     <div id="companies-page-container" className="pt-28 pb-20 w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

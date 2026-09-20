@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSEO } from '../utils/seo';
 import { PageId, TalentProfile, Course, ServiceItem } from '../types';
 import { 
   TALENT_PROFILES, 
@@ -44,6 +45,13 @@ export const HomePage: React.FC<HomePageProps> = ({
   onOpenStartProject,
   onOpenCourseEnroll
 }) => {
+  useSEO({
+    title: 'Techstackgist – African Technology Platform | Skills, Solutions & Talent',
+    description: 'Techstackgist connects people and businesses with digital products, professional services, practical training, and vetted African tech talent.',
+    canonicalPath: '/',
+    keywords: ['African tech platform', 'hire African engineers', 'software solutions Nigeria', 'tech training Africa', 'remote developers']
+  });
+
   return (
     <div id="homepage-content" className="w-full">
       

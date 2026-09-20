@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
+import { useSEO } from '../utils/seo';
 import { Mail, Phone, MapPin, Send, CheckCircle2, Globe, Clock, ShieldCheck, Copy, ExternalLink, Loader2, AlertCircle } from 'lucide-react';
-import { PRIMARY_CONTACT, submitEmailForm, SendEmailResult } from '../utils/email';
+import { PRIMARY_CONTACT, submitEmailForm, SendEmailResult, FORMSUBMIT_ACTION } from '../utils/email';
 
 export const ContactPage: React.FC = () => {
+  useSEO({
+    title: 'Contact Techstackgist | Hire Talent, Request Solutions & Support',
+    description: 'Get in touch with Techstackgist for talent matching, custom software inquiries, bootcamp admissions, or strategic technology partnerships.',
+    canonicalPath: '/contact',
+    keywords: ['contact Techstackgist', 'hire African developers contact', 'Ebetech Digital Solutions phone', 'Onitsha tech hub', 'tech support Africa']
+  });
+
   const [isSending, setIsSending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [deliveryResult, setDeliveryResult] = useState<SendEmailResult | null>(null);
@@ -135,7 +143,7 @@ export const ContactPage: React.FC = () => {
                 </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form action={FORMSUBMIT_ACTION} method="POST" onSubmit={handleSubmit} className="space-y-4">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="text-lg font-bold text-slate-900">
                     Send a Direct Inquiry

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TalentProfile } from '../../types';
 import { X, CheckCircle2, ShieldCheck, Briefcase, Building, Send, Clock, Mail, ExternalLink, Copy, Loader2, AlertCircle } from 'lucide-react';
-import { PRIMARY_CONTACT, submitEmailForm, SendEmailResult } from '../../utils/email';
+import { PRIMARY_CONTACT, submitEmailForm, SendEmailResult, FORMSUBMIT_ACTION } from '../../utils/email';
 
 interface HireTalentModalProps {
   isOpen: boolean;
@@ -190,7 +190,7 @@ Direct Phone: ${PRIMARY_CONTACT.phone}`;
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="p-6 space-y-4">
+          <form action={FORMSUBMIT_ACTION} method="POST" onSubmit={handleSubmit} className="p-6 space-y-4">
             
             {preselectedTalent && (
               <div className="p-3 rounded-xl bg-blue-50/80 border border-blue-200 flex items-center gap-3">

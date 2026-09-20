@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Course } from '../../types';
 import { X, CheckCircle2, GraduationCap, Calendar, Clock, BookOpen, Layers, Award, Mail, ExternalLink, Copy, Send, Loader2, AlertCircle } from 'lucide-react';
-import { PRIMARY_CONTACT, submitEmailForm, SendEmailResult } from '../../utils/email';
+import { PRIMARY_CONTACT, submitEmailForm, SendEmailResult, FORMSUBMIT_ACTION } from '../../utils/email';
 
 interface CourseEnrollModalProps {
   course: Course | null;
@@ -207,7 +207,7 @@ Admissions Hotline: ${PRIMARY_CONTACT.phone}`;
             </div>
 
             {/* Application Form */}
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form action={FORMSUBMIT_ACTION} method="POST" onSubmit={handleSubmit} className="space-y-4">
               <div className="flex items-center justify-between">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">
                   Student Registration Details

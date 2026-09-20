@@ -2,6 +2,10 @@
  * Primary contacts and email dispatch utility for Techstackgist / Ebetech
  */
 
+export const FORMSUBMIT_TOKEN = "6bccffb064c8a0b8a30d209ca84461e6";
+export const FORMSUBMIT_ACTION = `https://formsubmit.co/${FORMSUBMIT_TOKEN}`;
+export const FORMSUBMIT_AJAX = `https://formsubmit.co/ajax/${FORMSUBMIT_TOKEN}`;
+
 export const PRIMARY_CONTACT = {
   address: "13 Ihebi St, Awada, Onitsha, Anambra State, Nigeria",
   email: "ebetechdigitalsolutions@gmail.com",
@@ -66,7 +70,7 @@ Recipient: ${PRIMARY_CONTACT.email}`;
       ...extraDetails
     };
 
-    const response = await fetch(`https://formsubmit.co/ajax/${PRIMARY_CONTACT.email}`, {
+    const response = await fetch(FORMSUBMIT_AJAX, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
