@@ -1,4 +1,10 @@
-import { TalentProfile, Course, ProductItem, ServiceItem, Testimonial } from '../types';
+import { TalentProfile, Course, ProductItem, ServiceItem, Testimonial, BusinessSuccessStory, FAQItem } from '../types';
+import avatarAdebayo from '../assets/images/african_talent_adebayo_1792052929214.jpg';
+import avatarAma from '../assets/images/african_talent_ama_1792052931298.jpg';
+import avatarDavid from '../assets/images/african_talent_david_1792052951395.jpg';
+import avatarChinedu from '../assets/images/african_talent_chinedu_1792052952039.jpg';
+import avatarKezia from '../assets/images/african_talent_kezia_1792052974872.jpg';
+import avatarThabo from '../assets/images/african_talent_thabo_1792052974181.jpg';
 
 export const TALENT_PROFILES: TalentProfile[] = [
   {
@@ -9,7 +15,7 @@ export const TALENT_PROFILES: TalentProfile[] = [
     country: 'Nigeria',
     flag: '🇳🇬',
     city: 'Lagos',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80',
+    avatar: avatarAdebayo,
     skills: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'GraphQL', 'Jest'],
     experienceYears: 4,
     rateHourly: 35,
@@ -43,7 +49,7 @@ export const TALENT_PROFILES: TalentProfile[] = [
     country: 'Ghana',
     flag: '🇬🇭',
     city: 'Accra',
-    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&auto=format&fit=crop&q=80',
+    avatar: avatarAma,
     skills: ['Figma', 'Design Systems', 'UX Research', 'Prototyping', 'User Testing', 'WCAG AA'],
     experienceYears: 5,
     rateHourly: 40,
@@ -77,7 +83,7 @@ export const TALENT_PROFILES: TalentProfile[] = [
     country: 'Kenya',
     flag: '🇰🇪',
     city: 'Nairobi',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80',
+    avatar: avatarDavid,
     skills: ['Excel', 'SQL', 'Power BI', 'Python', 'Pandas', 'Tableau', 'dbt'],
     experienceYears: 4,
     rateHourly: 32,
@@ -111,7 +117,7 @@ export const TALENT_PROFILES: TalentProfile[] = [
     country: 'Nigeria',
     flag: '🇳🇬',
     city: 'Abuja',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&auto=format&fit=crop&q=80',
+    avatar: avatarChinedu,
     skills: ['SOC Operations', 'Penetration Testing', 'SIEM (Splunk)', 'ISO 27001', 'Network Security', 'Wireshark'],
     experienceYears: 5,
     rateHourly: 45,
@@ -139,7 +145,7 @@ export const TALENT_PROFILES: TalentProfile[] = [
     country: 'Rwanda',
     flag: '🇷🇼',
     city: 'Kigali',
-    avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&auto=format&fit=crop&q=80',
+    avatar: avatarKezia,
     skills: ['AWS', 'Docker', 'Kubernetes', 'Terraform', 'CI/CD Pipelines', 'Prometheus', 'Linux'],
     experienceYears: 4,
     rateHourly: 42,
@@ -167,7 +173,7 @@ export const TALENT_PROFILES: TalentProfile[] = [
     country: 'South Africa',
     flag: '🇿🇦',
     city: 'Cape Town',
-    avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=200&auto=format&fit=crop&q=80',
+    avatar: avatarThabo,
     skills: ['Node.js', 'React', 'Python / Django', 'PostgreSQL', 'Redis', 'Docker'],
     experienceYears: 6,
     rateHourly: 48,
@@ -188,6 +194,7 @@ export const TALENT_PROFILES: TalentProfile[] = [
     educationOrCert: 'B.Sc. Information Technology (UCT)'
   }
 ];
+
 
 export const COURSES: Course[] = [
   {
@@ -457,3 +464,261 @@ export const NETWORK_CORRIDORS = [
   { from: 'Abuja', fromCountry: 'Nigeria 🇳🇬', to: 'Toronto', toCountry: 'Canada 🇨🇦', distance: '8,400 km', timeDiff: '-5h', activeTalent: '190+ Pros' },
   { from: 'Cape Town', fromCountry: 'South Africa 🇿🇦', to: 'New York', toCountry: 'USA 🇺🇸', distance: '12,500 km', timeDiff: '-6h', activeTalent: '280+ Pros' }
 ];
+
+export const BUSINESS_SUCCESS_STORIES: BusinessSuccessStory[] = [
+  {
+    id: 'story-payrail',
+    companyName: 'PayRail Africa',
+    companyLocation: 'London & Lagos',
+    industry: 'Fintech & Cross-Border Payments',
+    clientName: 'Marcus Adekoya',
+    clientRole: 'Chief Technology Officer',
+    clientAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+    quote: 'We needed to deploy our high-concurrency payment APIs and migrate our cluster to AWS EKS before our growth round. Techstackgist matched us with Adebayo and Kezia in under 72 hours. Their clean code discipline and seamless timezone alignment cut our AWS cloud bills by 38% with zero production downtime.',
+    hiredTalents: [
+      {
+        name: 'Adebayo Olawale',
+        role: 'Senior Frontend Engineer',
+        avatar: avatarAdebayo,
+        flag: '🇳🇬'
+      },
+      {
+        name: 'Kezia Umutoni',
+        role: 'Cloud & DevOps Architect',
+        avatar: avatarKezia,
+        flag: '🇷🇼'
+      }
+    ],
+    metrics: [
+      { label: 'Time to First Match', value: '48 Hours' },
+      { label: 'Cloud Infrastructure Spend', value: '38% Reduced' },
+      { label: 'Payment API Uptime', value: '99.99%' }
+    ],
+    verifiedHireBadge: 'Verified Enterprise Hire',
+    timelineToHire: 'Matched in 2 days · Retained 14+ months'
+  },
+  {
+    id: 'story-logiflow',
+    companyName: 'LogiFlow Systems',
+    companyLocation: 'Nairobi, Kenya',
+    industry: 'Pan-African Telemetry & Freight',
+    clientName: 'Dr. Folashade Adeleke',
+    clientRole: 'Head of Digital Transformation',
+    clientAvatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80',
+    quote: 'Before Techstackgist, filtering through hundreds of unverified developer portfolios was burning weeks of our management time. Techstackgist pre-vetted David with rigorous live SQL & Python data challenges. He built our automated multi-country shipment telemetry portal in just 3 weeks.',
+    hiredTalents: [
+      {
+        name: 'David Mwangi',
+        role: 'Senior Data & BI Analyst',
+        avatar: avatarDavid,
+        flag: '🇰🇪'
+      }
+    ],
+    metrics: [
+      { label: 'Hiring Committee Time Saved', value: '75%' },
+      { label: 'Live Fleet Telemetry Nodes', value: '50k+ Daily' },
+      { label: 'Technical Vetting Score', value: '95/100' }
+    ],
+    verifiedHireBadge: 'Verified Enterprise Hire',
+    timelineToHire: 'Matched in 3 days · Scaled to Full-Time'
+  },
+  {
+    id: 'story-stratum',
+    companyName: 'Stratum Health UK',
+    companyLocation: 'London & Berlin',
+    industry: 'Digital Health & Clinician Software',
+    clientName: 'Julian Vance',
+    clientRole: 'VP of Engineering & Product',
+    clientAvatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80',
+    quote: 'Ama redesigned our clinician triage workspace with exceptional precision and strict WCAG 2.2 AA accessibility standards. Hiring African tech talent through Techstackgist gave us Silicon Valley-grade product design at a fraction of typical London agency lead times.',
+    hiredTalents: [
+      {
+        name: 'Ama Konadu',
+        role: 'Lead UI/UX & Design Systems',
+        avatar: avatarAma,
+        flag: '🇬🇭'
+      }
+    ],
+    metrics: [
+      { label: 'Clinician Task Velocity', value: '+44% Faster' },
+      { label: 'Design Delivery Sprints', value: '6 on Schedule' },
+      { label: 'Accessibility Audit', value: '100% WCAG AA' }
+    ],
+    verifiedHireBadge: 'Verified International Hire',
+    timelineToHire: 'Matched in 72 hours · Ongoing Contract'
+  },
+  {
+    id: 'story-kudax',
+    companyName: 'KudaX Commercial',
+    companyLocation: 'Cape Town & Amsterdam',
+    industry: 'E-Commerce Infrastructure',
+    clientName: 'Hendrik van Zyl',
+    clientRole: 'Director of Software Engineering',
+    clientAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+    quote: 'Black Friday flash sales used to create severe Redis queue bottlenecks and security risks. Techstackgist deployed Thabo and Chinedu to audit our microservices and implement rigorous zero-trust defenses. We handled over 1.2M checkout requests with 99.98% uptime.',
+    hiredTalents: [
+      {
+        name: 'Thabo Ndlovu',
+        role: 'Full Stack Backend Engineer',
+        avatar: avatarThabo,
+        flag: '🇿🇦'
+      },
+      {
+        name: 'Chinedu Eze',
+        role: 'Cybersecurity Analyst',
+        avatar: avatarChinedu,
+        flag: '🇳🇬'
+      }
+    ],
+    metrics: [
+      { label: 'Black Friday Uptime', value: '99.98%' },
+      { label: 'Checkout Throughput', value: '1.2M Orders' },
+      { label: 'Vulnerability Remediation', value: '100% Closed' }
+    ],
+    verifiedHireBadge: 'Verified Enterprise Squad',
+    timelineToHire: 'Squad Deployed in 5 days'
+  }
+];
+
+export const FAQ_ITEMS: FAQItem[] = [
+  // --- HIRING QUESTIONS ---
+  {
+    id: 'faq-hire-vetting',
+    category: 'Hiring',
+    question: 'How does Techstackgist vet and screen talent before listing them?',
+    answer: 'Every candidate undergoes a rigorous 4-stage evaluation process where only the top 3% to 5% are accepted: (1) Portfolio, background & GitHub code architecture review; (2) Live hands-on technical coding challenge and system design assessment with senior staff engineers; (3) Professional communication, English proficiency, and collaborative agility interview; and (4) Identity, reference, and past-work verification. We guarantee that anyone you interview is production-ready from day one.',
+    badge: 'Top 3% Vetted',
+    quickAction: {
+      label: 'Explore Vetted Talent',
+      target: 'talent'
+    }
+  },
+  {
+    id: 'faq-hire-speed',
+    category: 'Hiring',
+    question: 'How quickly can our team interview and onboard an engineer or designer?',
+    answer: 'Typically within 24 to 48 hours. Once you submit your role requirements or request an engineer, our talent matching team hand-picks 2 to 3 pre-vetted candidates who match your exact tech stack, industry domain, and working hours. Most client teams conduct technical syncs within 2 days and have the talent embedded into their sprint cycles within 5 business days.',
+    badge: '24-48h Matching',
+    quickAction: {
+      label: 'Request Talent Today',
+      target: 'hire'
+    }
+  },
+  {
+    id: 'faq-hire-trial',
+    category: 'Hiring',
+    question: 'What if a hired professional is not the right fit? Is there a trial period?',
+    answer: 'Yes, every engagement includes a 14-day zero-risk trial period. If at any point during the first two weeks you feel the talent is not meeting your technical or cultural expectations, you will not be billed for those hours, or we will match and replace them with a qualified alternate specialist within 48 hours at no additional fee.',
+    badge: '14-Day Guarantee',
+    quickAction: {
+      label: 'Start Risk-Free Trial',
+      target: 'hire'
+    }
+  },
+  {
+    id: 'faq-hire-timezone',
+    category: 'Hiring',
+    question: 'How do time zone overlap and day-to-day communication work?',
+    answer: 'Our talent pool is based across major tech hubs in West, East, Central, and Southern Africa (GMT+0 to GMT+3). This offers ideal operational synergy: a direct 4 to 8-hour working overlap with the United Kingdom, European Union, Middle East, and up to 5 hours with US East Coast (EST) mornings. All talent are fluent English speakers trained in asynchronous workflows, agile ceremonies, Slack, Discord, Jira, and GitHub.',
+    badge: 'GMT+0 to GMT+3 Sync',
+    quickAction: {
+      label: 'Browse Directory',
+      target: 'talent'
+    }
+  },
+  {
+    id: 'faq-hire-models',
+    category: 'Hiring',
+    question: 'What hiring models do you offer (full-time, contract, or squad augmentation)?',
+    answer: 'We provide flexible staffing structures adapted to your company stage: (1) Dedicated Full-Time Talent embedded directly into your internal teams; (2) Flexible Monthly Contract Hires for sprint surges or specific roadmaps; (3) Managed Multi-Disciplinary Squads (e.g., Tech Lead + 2 Full Stack Developers + UI/UX + QA) managed under SLA deliverables; and (4) Contract-to-Hire arrangements if you wish to transition talent into direct in-house employment down the road.',
+    badge: 'Flexible Models',
+    quickAction: {
+      label: 'Consult an Advisor',
+      target: 'about'
+    }
+  },
+
+  // --- TRAINING QUESTIONS ---
+  {
+    id: 'faq-training-instructors',
+    category: 'Training',
+    question: 'Who leads the courses, and how practical is the learning curriculum?',
+    answer: 'All Techstackgist courses and bootcamps are crafted and led by active industry professionals and senior engineering leads working at world-class technology organizations. Our pedagogical model is 80% practical project builds and 20% theory. Rather than solving trivial sandbox puzzles, students architect live production-grade systems—such as fintech ledgers, microservices, and design systems—deploying real code to cloud environments.',
+    badge: 'Industry Practitioners',
+    quickAction: {
+      label: 'Browse Courses',
+      target: 'courses'
+    }
+  },
+  {
+    id: 'faq-training-certification',
+    category: 'Training',
+    question: 'Do graduates receive industry certifications and direct job placement support?',
+    answer: 'Yes. Upon successfully completing course capstones and passing code reviews, learners earn an authenticated Techstackgist Certificate with unique cryptographic verification codes for LinkedIn and resumes. Top-performing graduates are automatically funneled into the Techstackgist Vetted Talent Pool, receiving resume optimization, mock technical interview coaching, and priority referrals to hiring partners worldwide.',
+    badge: 'Verified Credential',
+    quickAction: {
+      label: 'Explore Academy Tracks',
+      target: 'courses'
+    }
+  },
+  {
+    id: 'faq-training-beginners',
+    category: 'Training',
+    question: 'Can beginners with zero tech or coding background enroll?',
+    answer: 'Absolutely. We offer dedicated foundational pathways (such as Frontend Fundamentals, Product Design Essentials, and Intro to Python & Data) tailored specifically for individuals pivoting into technology. Each learner is assigned a dedicated mentor and study group to guide them through weekly office hours, feedback sessions, and foundational milestones before progressing to advanced tracks.',
+    badge: 'Beginner-Friendly',
+    quickAction: {
+      label: 'View Starter Tracks',
+      target: 'courses'
+    }
+  },
+
+  // --- SERVICES & ENGINEERING QUESTIONS ---
+  {
+    id: 'faq-services-capabilities',
+    category: 'Services',
+    question: 'What kinds of custom software and engineering projects can you build?',
+    answer: 'Our engineering services team delivers turnkey digital solutions across the product lifecycle: Custom Web & Mobile Apps (React, Next.js, Node.js, Flutter, React Native), Enterprise Cloud Migrations & DevOps (AWS, GCP, Docker, Kubernetes), Fintech & Payment Gateway Integrations (Stripe, Paystack, Flutterwave), AI/ML Workflow Automation, and Comprehensive UI/UX Product Design systems. Every deliverable includes automated test coverage, architectural documentation, and production warranties.',
+    badge: 'Full-Cycle Delivery',
+    quickAction: {
+      label: 'See Our Services',
+      target: 'services'
+    }
+  },
+  {
+    id: 'faq-services-mvp',
+    category: 'Services',
+    question: 'Can you help early-stage startups design and ship an MVP in weeks?',
+    answer: 'Yes! We specialize in "Founder Sprints"—taking raw specs, sketches, or wireframes to a live, testable, production-ready MVP in 4 to 8 weeks. We assign a dedicated product manager, senior full-stack team, and designer to sprint against milestones, allowing founders to validate user demand, pitch investors, and onboard initial paying customers without burning exorbitant runway.',
+    badge: '4-8 Week Sprint',
+    quickAction: {
+      label: 'Start a Project',
+      target: 'services'
+    }
+  },
+  {
+    id: 'faq-services-ip',
+    category: 'Services',
+    question: 'Who owns the intellectual property (IP), source code, and design assets?',
+    answer: 'You retain 100% ownership. From the moment code is written or designs are drafted, all intellectual property, git repositories, design tokens, deployment configurations, and data artifacts belong exclusively to your business. We execute binding NDAs and IP assignment clauses prior to commencing any contract or placement.',
+    badge: '100% IP Ownership',
+    quickAction: {
+      label: 'Review Contracts',
+      target: 'about'
+    }
+  },
+
+  // --- COMPLIANCE & BILLING ---
+  {
+    id: 'faq-compliance-billing',
+    category: 'Compliance',
+    question: 'How do international payments, contracts, and currency conversions work?',
+    answer: 'We remove cross-border legal and operational friction entirely. Techstackgist operates as your single legal counterparty with standardized US/EU-compliant Master Services Agreements (MSAs). You receive a single, transparent monthly invoice payable in USD, EUR, or GBP via international wire (SWIFT/ACH), Stripe, or Wise. We handle all international contractor payroll, local currency payout, compliance, and withholding documentation.',
+    badge: 'Global Compliance',
+    quickAction: {
+      label: 'Contact Billing Team',
+      target: 'about'
+    }
+  }
+];
+

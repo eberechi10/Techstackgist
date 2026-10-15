@@ -6,7 +6,11 @@ export type PageId =
   | 'talent' 
   | 'companies' 
   | 'about' 
-  | 'contact';
+  | 'contact'
+  | 'hire'
+  | 'start-project'
+  | 'enroll'
+  | 'talent-profile';
 
 export interface TalentProfile {
   id: string;
@@ -86,3 +90,39 @@ export interface Testimonial {
   countryFlag?: string;
   avatar: string;
 }
+
+export interface BusinessSuccessStory {
+  id: string;
+  companyName: string;
+  companyLocation: string;
+  industry: string;
+  clientName: string;
+  clientRole: string;
+  clientAvatar: string;
+  quote: string;
+  hiredTalents: {
+    name: string;
+    role: string;
+    avatar: string;
+    flag: string;
+  }[];
+  metrics: {
+    label: string;
+    value: string;
+  }[];
+  verifiedHireBadge: string;
+  timelineToHire: string;
+}
+
+export interface FAQItem {
+  id: string;
+  category: 'Hiring' | 'Training' | 'Services' | 'Compliance';
+  question: string;
+  answer: string;
+  badge?: string;
+  quickAction?: {
+    label: string;
+    target: 'hire' | 'talent' | 'courses' | 'services' | 'about';
+  };
+}
+

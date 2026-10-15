@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSEO } from '../utils/seo';
 import { PageId, TalentProfile, Course, ServiceItem } from '../types';
 import { 
@@ -6,10 +6,12 @@ import {
   COURSES, 
   PRODUCTS, 
   SERVICES, 
-  TESTIMONIALS 
+  TESTIMONIALS,
+  BUSINESS_SUCCESS_STORIES,
+  FAQ_ITEMS
 } from '../data/mockData';
-import { HeroNetworkVisual } from '../components/HeroNetworkVisual';
 import { GlobalNetworkVisual } from '../components/GlobalNetworkVisual';
+import techProOnDuty from '../assets/images/tech_pro_on_duty_1792049321147.jpg';
 import { 
   ArrowRight, 
   ArrowUpRight, 
@@ -25,9 +27,23 @@ import {
   Sparkles, 
   Star,
   ChevronRight,
+  ChevronDown,
   TrendingUp,
   Cpu,
-  Layers
+  Layers,
+  Quote,
+  Building,
+  Clock,
+  Award,
+  Check,
+  ExternalLink,
+  Briefcase,
+  HelpCircle,
+  Search,
+  X,
+  MessageSquare,
+  Headphones,
+  Lock
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -52,83 +68,190 @@ export const HomePage: React.FC<HomePageProps> = ({
     keywords: ['African tech platform', 'hire African engineers', 'software solutions Nigeria', 'tech training Africa', 'remote developers']
   });
 
+  const [storyFilter, setStoryFilter] = useState<string>('All');
+  const [showLearnerStories, setShowLearnerStories] = useState<boolean>(false);
+
+  // FAQ Accordion & Search State
+  const [faqCategory, setFaqCategory] = useState<string>('All');
+  const [faqSearch, setFaqSearch] = useState<string>('');
+  const [openFaqIds, setOpenFaqIds] = useState<string[]>(['faq-hire-vetting', 'faq-hire-speed']);
+
+  const toggleFaq = (id: string) => {
+    setOpenFaqIds(prev => 
+      prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
+    );
+  };
+
+  const expandAllFiltered = (items: typeof FAQ_ITEMS) => {
+    setOpenFaqIds(items.map(item => item.id));
+  };
+
+  const collapseAllFaqs = () => {
+    setOpenFaqIds([]);
+  };
+
+  const handleFaqAction = (target: string) => {
+    if (target === 'hire') {
+      onOpenHireModal();
+    } else if (target === 'services') {
+      onOpenStartProject();
+    } else if (target === 'talent' || target === 'courses' || target === 'about') {
+      onNavigate(target as PageId);
+    }
+  };
+
+  const filteredFaqs = FAQ_ITEMS.filter(faq => {
+    const matchesCategory = faqCategory === 'All' || faq.category === faqCategory;
+    const matchesSearch = faqSearch.trim() === '' || 
+      faq.question.toLowerCase().includes(faqSearch.toLowerCase()) ||
+      faq.answer.toLowerCase().includes(faqSearch.toLowerCase()) ||
+      (faq.badge && faq.badge.toLowerCase().includes(faqSearch.toLowerCase()));
+    return matchesCategory && matchesSearch;
+  });
+
   return (
     <div id="homepage-content" className="w-full">
       
       {/* ============================================================ */}
       {/* 1. HERO SECTION */}
       {/* ============================================================ */}
-      <section id="hero-section" className="pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden relative">
+      <section id="hero-section" className="pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden relative bg-gradient-to-b from-slate-50 via-white to-slate-50">
         {/* Subtle ambient lighting */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-blue-500/10 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-blue-500/10 blur-[130px] rounded-full pointer-events-none -z-10"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-stretch">
             
-            {/* Left Column: Core Positioning Copy */}
-            <div className="lg:col-span-6 space-y-6">
+            {/* Left Column: Core Positioning & High-Converting Copy */}
+            <div className="lg:col-span-6 flex flex-col justify-between space-y-6">
               
-              {/* Pill badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-semibold">
-                <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
-                <span>The Pan-African Technology Ecosystem</span>
-              </div>
+              <div className="space-y-6">
+                {/* Category / Sub-brand overline */}
+                <div className="flex items-center gap-2 text-xs font-semibold text-blue-700 uppercase tracking-wider">
+                  <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+                  <span>The Pan-African Technology Ecosystem</span>
+                  <span aria-hidden="true" className="text-slate-400">·</span>
+                  <span className="text-slate-500 font-medium">Global Delivery</span>
+                </div>
 
-              {/* Headline */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.08]">
-                Africa&apos;s technology platform for <span className="text-blue-600">skills, solutions & talent.</span>
-              </h1>
+                {/* Compelling Headline */}
+                <h1 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold text-slate-900 tracking-tight leading-[1.12]">
+                  Scale your engineering with Africa&apos;s <span className="text-blue-600">vetted tech talent</span> & digital solutions.
+                </h1>
 
-              {/* Supporting text */}
-              <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl">
-                Learn practical technology skills, access digital products and services, and discover skilled African professionals ready to work with companies around the world.
-              </p>
+                {/* Subheadline emphasizing the value proposition */}
+                <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl">
+                  Hire top 3% African software engineers, deploy production-ready digital products, and access industry-grade training. Matched in under 72 hours with zero hiring friction, verified code quality, and seamless remote collaboration.
+                </p>
 
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
-                <button
-                  id="hero-explore-tsg-btn"
-                  onClick={() => {
-                    const el = document.getElementById('ecosystem-strip');
-                    el?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <span>Explore Techstackgist</span>
-                  <ArrowRight className="w-4 h-4 text-blue-400" />
-                </button>
+                {/* Action Buttons: Primary 'Get Started' Call-to-Action on one line */}
+                <div className="flex flex-row flex-wrap items-center gap-3.5 pt-2">
+                  <button
+                    id="hero-get-started-btn"
+                    onClick={() => onOpenHireModal()}
+                    className="px-7 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-base shadow-md shadow-blue-600/25 transition-all inline-flex items-center justify-center gap-2 cursor-pointer hover:shadow-lg hover:shadow-blue-600/30 active:scale-[0.99] whitespace-nowrap shrink-0"
+                  >
+                    <span className="whitespace-nowrap">Get Started</span>
+                    <ArrowRight className="w-4 h-4 shrink-0" />
+                  </button>
 
-                <button
-                  id="hero-hire-talent-btn"
-                  onClick={() => onOpenHireModal()}
-                  className="px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md shadow-blue-600/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <span>Hire Tech Talent</span>
-                  <ArrowUpRight className="w-4 h-4" />
-                </button>
+                  <button
+                    id="hero-explore-talent-btn"
+                    onClick={() => onNavigate('talent')}
+                    className="px-6 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm shadow-xs transition-all inline-flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] whitespace-nowrap shrink-0"
+                  >
+                    <span className="whitespace-nowrap">Explore Talent</span>
+                    <ArrowUpRight className="w-4 h-4 text-blue-400 shrink-0" />
+                  </button>
+                </div>
               </div>
 
               {/* Micro proof points */}
-              <div className="pt-4 flex flex-wrap items-center gap-6 text-xs text-slate-500 font-medium border-t border-slate-200/70">
+              <div className="pt-4 flex flex-wrap items-center gap-y-2 gap-x-5 text-xs text-slate-500 font-medium border-t border-slate-200/80 mt-auto">
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                  <span>Screened in Software, UX & Data</span>
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>Top 3% Vetted Talent</span>
                 </div>
+                <span aria-hidden="true" className="text-slate-300 hidden sm:inline">·</span>
                 <div className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-4 h-4 text-blue-600" />
-                  <span>Direct Global Placement</span>
+                  <ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" />
+                  <span>&lt; 72h Candidate Matching</span>
                 </div>
+                <span aria-hidden="true" className="text-slate-300 hidden sm:inline">·</span>
                 <div className="flex items-center gap-1.5">
-                  <Globe className="w-4 h-4 text-slate-600" />
-                  <span>Lagos · Nairobi · Accra · Kigali · Cape Town</span>
+                  <Globe className="w-4 h-4 text-slate-600 shrink-0" />
+                  <span>Lagos · Nairobi · Accra · Awada HQ</span>
                 </div>
               </div>
 
             </div>
 
-            {/* Right Column: Hero Network Interface */}
-            <div className="lg:col-span-6">
-              <HeroNetworkVisual />
+            {/* Right Column: African Tech Professional on Duty (Aligned in height with Left Column) */}
+            <div className="lg:col-span-6 flex flex-col h-full">
+              <div className="relative w-full h-full rounded-2xl bg-white p-2.5 sm:p-3 shadow-2xl border border-slate-200/90 group transition-all duration-300 hover:shadow-blue-500/10 flex flex-col justify-between">
+                
+                {/* Tech Professional On Duty Visual Frame */}
+                <div className="relative rounded-xl overflow-hidden flex-1 min-h-[380px] sm:min-h-[420px] lg:min-h-[440px] w-full bg-slate-900 border border-slate-100 flex flex-col justify-between">
+                  <img
+                    src={techProOnDuty}
+                    alt="African tech professional on duty at Techstackgist engineering workspace"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                  />
+                  
+                  {/* Subtle gradient bottom overlay for readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent pointer-events-none"></div>
+
+                  {/* Top Left Floating Badge: Active Status */}
+                  <div className="relative z-10 m-3.5 self-start bg-slate-950/90 backdrop-blur-md border border-slate-700/80 px-3 py-1.5 rounded-lg text-white shadow-lg pointer-events-none flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <div className="text-[11px] leading-tight text-left">
+                      <span className="font-semibold block text-white">Tech Professional on Duty</span>
+                      <span className="text-slate-400 text-[10px]">Active Engineering Workspace</span>
+                    </div>
+                  </div>
+
+                  {/* Top Right: Top 3% Vetted Badge */}
+                  <div className="absolute top-3.5 right-3.5 z-10 bg-blue-600/95 backdrop-blur-md text-white px-2.5 py-1 rounded-md text-[11px] font-bold tracking-wide shadow-md flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    <span>Top 3% Vetted</span>
+                  </div>
+
+                  {/* Bottom Info Bar Overlay */}
+                  <div className="relative z-10 m-3 bg-slate-900/90 backdrop-blur-md border border-slate-700/80 rounded-xl p-3 text-white flex items-center justify-between shadow-lg">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-blue-400 font-bold text-xs shrink-0">
+                        TSG
+                      </div>
+                      <div className="text-left">
+                        <p className="text-xs font-bold text-white leading-tight">
+                          Enterprise Full-Stack & Cloud Architecture
+                        </p>
+                        <p className="text-[11px] text-slate-300">
+                          Production-grade delivery · Lagos · Nairobi · Awada HQ
+                        </p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => onOpenHireModal()}
+                      className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold transition-colors cursor-pointer shrink-0 hover:bg-blue-500 active:scale-95"
+                    >
+                      <span>Hire Talent</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Sub-card Verification Summary */}
+                <div className="mt-2.5 px-3 py-1.5 flex items-center justify-between text-xs text-slate-500 shrink-0">
+                  <span className="flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <span>Live pair programming & architecture verified</span>
+                  </span>
+                  <span className="font-mono text-[11px] font-medium text-slate-400">
+                    99.4% Match Accuracy
+                  </span>
+                </div>
+              </div>
             </div>
 
           </div>
@@ -803,64 +926,560 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* ============================================================ */}
-      {/* 10. TESTIMONIALS */}
+      {/* 10. SUCCESS STORIES (BUSINESS HIRING OUTCOMES) */}
       {/* ============================================================ */}
-      <section id="testimonials-section" className="py-20 lg:py-28 bg-slate-50">
+      <section id="success-stories-section" className="py-20 lg:py-28 bg-slate-50 border-t border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-bold mb-3">
-              <Star className="w-3.5 h-3.5 fill-blue-600 text-blue-600" />
-              Verified Stories
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-100 text-blue-800 text-xs font-bold mb-3 shadow-xs">
+              <Building2 className="w-3.5 h-3.5 text-blue-700" />
+              <span>Success Stories · Verified Business Outcomes</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Trusted across the ecosystem.
+            <h2 className="text-3xl sm:text-4xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              How companies scale faster with Techstackgist talent.
             </h2>
-            <p className="text-sm text-slate-600 mt-2">
-              From learners breaking into tech to senior engineers and international hiring executives.
+            <p className="text-sm sm:text-base text-slate-600 mt-3 leading-relaxed">
+              Explore authentic hiring testimonials, retention milestones, and business impact from enterprises, international scale-ups, and tech founders who hired vetted African talent through Techstackgist.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {TESTIMONIALS.map((t) => (
-              <div
-                key={t.id}
-                className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-xs flex flex-col justify-between"
-              >
-                <div>
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold mb-4">
-                    {t.type} Perspective
-                  </div>
-                  <p className="text-sm text-slate-700 italic leading-relaxed mb-6">
-                    &ldquo;{t.quote}&rdquo;
-                  </p>
-                </div>
+          {/* Industry Filter Tabs */}
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mb-10">
+            {[
+              { id: 'All', label: 'All Businesses', count: BUSINESS_SUCCESS_STORIES.length },
+              { id: 'Fintech', label: 'Fintech & Payments', count: 1 },
+              { id: 'Logistics', label: 'Logistics & Telemetry', count: 1 },
+              { id: 'Health', label: 'Digital Health & UX', count: 1 },
+              { id: 'E-Commerce', label: 'E-Commerce', count: 1 }
+            ].map((tab) => {
+              const isActive = storyFilter === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setStoryFilter(tab.id)}
+                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer flex items-center gap-2 ${
+                    isActive
+                      ? 'bg-blue-600 text-white shadow-sm shadow-blue-600/25'
+                      : 'bg-white hover:bg-slate-100 text-slate-600 border border-slate-200'
+                  }`}
+                >
+                  <span>{tab.label}</span>
+                  <span className={`px-1.5 py-0.5 rounded-md text-[10px] font-bold ${
+                    isActive ? 'bg-blue-500 text-white' : 'bg-slate-100 text-slate-500'
+                  }`}>
+                    {tab.count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
 
-                <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
-                  <img 
-                    src={t.avatar} 
-                    alt={t.author} 
-                    className="w-10 h-10 rounded-full object-cover border border-slate-200"
-                  />
+          {/* Business Success Stories Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-14">
+            {BUSINESS_SUCCESS_STORIES
+              .filter((story) => {
+                if (storyFilter === 'All') return true;
+                if (storyFilter === 'Fintech') return story.industry.includes('Fintech');
+                if (storyFilter === 'Logistics') return story.industry.includes('Freight') || story.industry.includes('Telemetry');
+                if (storyFilter === 'Health') return story.industry.includes('Health');
+                if (storyFilter === 'E-Commerce') return story.industry.includes('E-Commerce');
+                return true;
+              })
+              .map((story) => (
+                <div
+                  key={story.id}
+                  className="bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow p-6 sm:p-7 flex flex-col justify-between"
+                >
                   <div>
-                    <div className="font-bold text-sm text-slate-900 flex items-center gap-1">
-                      <span>{t.author}</span>
-                      {t.countryFlag && <span>{t.countryFlag}</span>}
+                    {/* Top Company & Verification Row */}
+                    <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-100">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <h3 className="font-extrabold text-lg text-slate-900 tracking-tight">
+                            {story.companyName}
+                          </h3>
+                          <span className="text-xs text-slate-500 font-medium">
+                            · {story.companyLocation}
+                          </span>
+                        </div>
+                        <span className="inline-block mt-1 text-[11px] font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md">
+                          {story.industry}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 text-[11px] font-bold border border-emerald-200/70">
+                        <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                        <span>{story.verifiedHireBadge}</span>
+                      </div>
                     </div>
-                    <div className="text-xs text-slate-500">
-                      {t.role} · {t.locationOrCompany}
+
+                    {/* Testimonial Quote */}
+                    <div className="my-5">
+                      <div className="flex items-start gap-3">
+                        <Quote className="w-6 h-6 text-blue-600/30 shrink-0 mt-0.5" />
+                        <p className="text-sm sm:text-[15px] text-slate-700 leading-relaxed italic">
+                          &ldquo;{story.quote}&rdquo;
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Verified Hiring Impact Metrics */}
+                    <div className="grid grid-cols-3 gap-2.5 my-5 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                      {story.metrics.map((m, idx) => (
+                        <div key={idx} className="text-center p-2 rounded-lg bg-white shadow-2xs border border-slate-200/60">
+                          <div className="text-sm sm:text-base font-extrabold text-slate-900 leading-tight">
+                            {m.value}
+                          </div>
+                          <div className="text-[10px] text-slate-500 font-medium mt-0.5 line-clamp-1">
+                            {m.label}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Vetted Talent Hired by this Business */}
+                    <div className="pt-4 border-t border-slate-100">
+                      <p className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                        <Users className="w-3.5 h-3.5 text-blue-600" />
+                        <span>African Talent Hired through Techstackgist:</span>
+                      </p>
+                      <div className="space-y-2.5">
+                        {story.hiredTalents.map((hired, hIdx) => {
+                          const matchedProfile = TALENT_PROFILES.find((tp) => tp.name === hired.name);
+                          return (
+                            <div 
+                              key={hIdx}
+                              className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 hover:bg-blue-50/50 border border-slate-100 transition-colors"
+                            >
+                              <div className="flex items-center gap-3">
+                                <img
+                                  src={hired.avatar}
+                                  alt={hired.name}
+                                  className="w-10 h-10 rounded-full object-cover border border-slate-200 shadow-2xs"
+                                />
+                                <div>
+                                  <div className="font-bold text-xs sm:text-sm text-slate-900 flex items-center gap-1.5">
+                                    <span>{hired.name}</span>
+                                    <span>{hired.flag}</span>
+                                  </div>
+                                  <p className="text-[11px] text-slate-500">
+                                    {hired.role}
+                                  </p>
+                                </div>
+                              </div>
+
+                              {matchedProfile && (
+                                <button
+                                  onClick={() => onOpenTalentDetail(matchedProfile)}
+                                  className="text-[11px] font-semibold text-blue-600 hover:text-blue-800 px-2.5 py-1 rounded-md bg-white border border-slate-200 hover:border-blue-300 shadow-2xs flex items-center gap-1 transition-all cursor-pointer"
+                                >
+                                  <span>View Profile</span>
+                                  <ArrowUpRight className="w-3 h-3" />
+                                </button>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
+
+                  {/* Client Executive Card Footer */}
+                  <div className="mt-6 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      <img
+                        src={story.clientAvatar}
+                        alt={story.clientName}
+                        className="w-9 h-9 rounded-full object-cover border border-slate-200"
+                      />
+                      <div>
+                        <div className="text-xs font-bold text-slate-900">
+                          {story.clientName}
+                        </div>
+                        <div className="text-[11px] text-slate-500">
+                          {story.clientRole} · {story.companyName}
+                        </div>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => onOpenHireModal()}
+                      className="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-blue-600 text-white text-xs font-semibold transition-all inline-flex items-center gap-1.5 cursor-pointer shadow-2xs active:scale-95"
+                    >
+                      <span>Hire Similar Talent</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+
+                </div>
+              ))}
+          </div>
+
+          {/* Hiring Trust & Guarantee Statistics Banner */}
+          <div className="rounded-2xl bg-white border border-slate-200 p-6 sm:p-8 shadow-xs mb-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-slate-100">
+              <div className="pt-3 md:pt-0">
+                <div className="text-2xl sm:text-3xl font-extrabold text-blue-600">
+                  &lt; 72 Hours
+                </div>
+                <div className="text-xs text-slate-600 mt-1 font-medium">
+                  Average Time to Candidate Shortlist
                 </div>
               </div>
-            ))}
+              <div className="pt-3 md:pt-0">
+                <div className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                  99.4%
+                </div>
+                <div className="text-xs text-slate-600 mt-1 font-medium">
+                  Client-Talent Retention Rate
+                </div>
+              </div>
+              <div className="pt-3 md:pt-0">
+                <div className="text-2xl sm:text-3xl font-extrabold text-blue-600">
+                  Top 3%
+                </div>
+                <div className="text-xs text-slate-600 mt-1 font-medium">
+                  Pre-Vetted African Engineers & Designers
+                </div>
+              </div>
+              <div className="pt-3 md:pt-0">
+                <div className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                  35% – 45%
+                </div>
+                <div className="text-xs text-slate-600 mt-1 font-medium">
+                  Typical Cost Savings vs US/EU Agencies
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Optional Toggle for Community & Learner Perspectives */}
+          <div className="text-center">
+            <button
+              onClick={() => setShowLearnerStories(!showLearnerStories)}
+              className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-600 hover:text-blue-600 px-4 py-2 rounded-xl bg-white border border-slate-200 hover:border-slate-300 transition-colors cursor-pointer"
+            >
+              <span>{showLearnerStories ? 'Hide Alumni & Learner Stories' : 'Also view Alumni & Learner Stories'}</span>
+              <ChevronRight className={`w-4 h-4 transition-transform ${showLearnerStories ? 'rotate-90' : ''}`} />
+            </button>
+
+            {showLearnerStories && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 text-left animate-in fade-in duration-300">
+                {TESTIMONIALS.map((t) => (
+                  <div
+                    key={t.id}
+                    className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-xs flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold mb-4">
+                        {t.type} Perspective
+                      </div>
+                      <p className="text-sm text-slate-700 italic leading-relaxed mb-6">
+                        &ldquo;{t.quote}&rdquo;
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+                      <img 
+                        src={t.avatar} 
+                        alt={t.author} 
+                        className="w-10 h-10 rounded-full object-cover border border-slate-200"
+                      />
+                      <div>
+                        <div className="font-bold text-sm text-slate-900 flex items-center gap-1">
+                          <span>{t.author}</span>
+                          {t.countryFlag && <span>{t.countryFlag}</span>}
+                        </div>
+                        <div className="text-xs text-slate-500">
+                          {t.role} · {t.locationOrCompany}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
         </div>
       </section>
 
       {/* ============================================================ */}
-      {/* 11. FINAL CTA */}
+      {/* 11. FREQUENTLY ASKED QUESTIONS (FAQ) */}
+      {/* ============================================================ */}
+      <section id="faq-section" className="py-20 lg:py-28 bg-white border-t border-slate-200/80 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-semibold mb-4">
+              <HelpCircle className="w-3.5 h-3.5 text-blue-600" />
+              <span>Clear Answers · Transparent Operations</span>
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              Frequently asked questions
+            </h2>
+
+            <p className="text-base sm:text-lg text-slate-600 mt-4 leading-relaxed">
+              Everything you need to know about our 4-stage talent vetting, 14-day trial guarantee, technical training tracks, and IP protections.
+            </p>
+
+            {/* Interactive Search Bar */}
+            <div className="mt-8 relative max-w-lg mx-auto">
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <input
+                  type="text"
+                  value={faqSearch}
+                  onChange={(e) => setFaqSearch(e.target.value)}
+                  placeholder="Search questions (e.g. vetting, pricing, trial, time zones...)"
+                  className="w-full pl-11 pr-10 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all shadow-xs"
+                />
+                {faqSearch && (
+                  <button
+                    onClick={() => setFaqSearch('')}
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-0.5 rounded cursor-pointer"
+                    title="Clear search"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Interactive Category Filter Pills */}
+            <div className="flex flex-wrap items-center justify-center gap-2 mt-5">
+              {[
+                { id: 'All', label: 'All Questions', count: FAQ_ITEMS.length },
+                { id: 'Hiring', label: 'Hiring & Talent', count: FAQ_ITEMS.filter(f => f.category === 'Hiring').length },
+                { id: 'Training', label: 'Training & Academy', count: FAQ_ITEMS.filter(f => f.category === 'Training').length },
+                { id: 'Services', label: 'Services & Engineering', count: FAQ_ITEMS.filter(f => f.category === 'Services').length },
+                { id: 'Compliance', label: 'Billing & Compliance', count: FAQ_ITEMS.filter(f => f.category === 'Compliance').length }
+              ].map(cat => {
+                const isSelected = faqCategory === cat.id;
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => setFaqCategory(cat.id)}
+                    className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
+                      isSelected
+                        ? 'bg-blue-600 text-white shadow-sm shadow-blue-500/20'
+                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200/80 hover:text-slate-900'
+                    }`}
+                  >
+                    <span>{cat.label}</span>
+                    <span className={`text-[11px] px-1.5 py-0.2 rounded-full font-bold ${
+                      isSelected ? 'bg-blue-700 text-blue-100' : 'bg-slate-200 text-slate-600'
+                    }`}>
+                      {cat.count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Status bar: counts and expand/collapse all */}
+            <div className="flex items-center justify-between text-xs text-slate-500 max-w-4xl mx-auto mt-6 px-1">
+              <span>
+                Showing <strong className="text-slate-700">{filteredFaqs.length}</strong> of {FAQ_ITEMS.length} questions
+                {faqSearch && <span> for &ldquo;{faqSearch}&rdquo;</span>}
+              </span>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => expandAllFiltered(filteredFaqs)}
+                  className="hover:text-blue-600 font-medium cursor-pointer transition-colors"
+                >
+                  Expand all
+                </button>
+                <span>·</span>
+                <button
+                  onClick={collapseAllFaqs}
+                  className="hover:text-blue-600 font-medium cursor-pointer transition-colors"
+                >
+                  Collapse all
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Accordion List */}
+          <div className="max-w-4xl mx-auto space-y-3.5">
+            {filteredFaqs.length === 0 ? (
+              <div className="p-12 text-center rounded-2xl border border-dashed border-slate-200 bg-slate-50/50">
+                <HelpCircle className="w-10 h-10 text-slate-400 mx-auto mb-3" />
+                <h3 className="text-base font-bold text-slate-800">No questions found matching your search</h3>
+                <p className="text-sm text-slate-500 mt-1 max-w-sm mx-auto">
+                  We couldn&apos;t find any FAQs matching &ldquo;{faqSearch}&rdquo;. Try another term or reset your search.
+                </p>
+                <button
+                  onClick={() => { setFaqSearch(''); setFaqCategory('All'); }}
+                  className="mt-4 px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition-colors cursor-pointer"
+                >
+                  Reset Search & Filters
+                </button>
+              </div>
+            ) : (
+              filteredFaqs.map((faq) => {
+                const isOpen = openFaqIds.includes(faq.id);
+                return (
+                  <div
+                    key={faq.id}
+                    className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
+                      isOpen
+                        ? 'bg-blue-50/20 border-blue-200 shadow-sm'
+                        : 'bg-white border-slate-200/90 hover:border-slate-300 shadow-xs'
+                    }`}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => toggleFaq(faq.id)}
+                      aria-expanded={isOpen}
+                      aria-controls={`faq-answer-${faq.id}`}
+                      className="w-full text-left p-5 sm:p-6 flex items-start justify-between gap-4 cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-blue-500 rounded-2xl"
+                    >
+                      <div className="flex-1 pr-2">
+                        <div className="flex flex-wrap items-center gap-2 mb-2">
+                          <span className={`text-[11px] font-semibold px-2.5 py-0.5 rounded-full ${
+                            faq.category === 'Hiring' ? 'bg-blue-100 text-blue-700' :
+                            faq.category === 'Training' ? 'bg-amber-100 text-amber-800' :
+                            faq.category === 'Services' ? 'bg-purple-100 text-purple-700' :
+                            'bg-emerald-100 text-emerald-700'
+                          }`}>
+                            {faq.category}
+                          </span>
+                          {faq.badge && (
+                            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
+                              {faq.badge}
+                            </span>
+                          )}
+                        </div>
+                        <h3 className={`text-base sm:text-lg font-bold transition-colors ${
+                          isOpen ? 'text-blue-950' : 'text-slate-900'
+                        }`}>
+                          {faq.question}
+                        </h3>
+                      </div>
+                      
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-transform duration-200 mt-1 ${
+                        isOpen ? 'bg-blue-600 text-white rotate-180' : 'bg-slate-100 text-slate-500'
+                      }`}>
+                        <ChevronDown className="w-4 h-4" />
+                      </div>
+                    </button>
+
+                    {isOpen && (
+                      <div
+                        id={`faq-answer-${faq.id}`}
+                        role="region"
+                        className="px-5 pb-5 sm:px-6 sm:pb-6 pt-0 animate-in fade-in duration-200"
+                      >
+                        <div className="border-t border-slate-100 pt-4">
+                          <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-normal">
+                            {faq.answer}
+                          </p>
+
+                          {faq.quickAction && (
+                            <div className="mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
+                              <span className="text-xs text-slate-500 font-medium">Ready to take the next step?</span>
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleFaqAction(faq.quickAction!.target);
+                                }}
+                                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors cursor-pointer group"
+                              >
+                                <span>{faq.quickAction.label}</span>
+                                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })
+            )}
+          </div>
+
+          {/* Trust & Guarantee Badges Grid */}
+          <div className="max-w-4xl mx-auto mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 text-left">
+              <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center mb-2.5">
+                <ShieldCheck className="w-4 h-4" />
+              </div>
+              <div className="font-bold text-sm text-slate-900">Top 3% Vetted</div>
+              <div className="text-xs text-slate-500 mt-1">Multi-stage system coding & architecture rigor</div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 text-left">
+              <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center mb-2.5">
+                <Clock className="w-4 h-4" />
+              </div>
+              <div className="font-bold text-sm text-slate-900">14-Day Trial</div>
+              <div className="text-xs text-slate-500 mt-1">Zero-risk guarantee or immediate replacement</div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 text-left">
+              <div className="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center mb-2.5">
+                <Lock className="w-4 h-4" />
+              </div>
+              <div className="font-bold text-sm text-slate-900">100% IP Ownership</div>
+              <div className="text-xs text-slate-500 mt-1">Direct repo & asset transfer under binding NDAs</div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 text-left">
+              <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center mb-2.5">
+                <Globe className="w-4 h-4" />
+              </div>
+              <div className="font-bold text-sm text-slate-900">Global Billing</div>
+              <div className="text-xs text-slate-500 mt-1">Simple USD, EUR, or GBP consolidated invoice</div>
+            </div>
+          </div>
+
+          {/* Still Have Questions Consultation Box */}
+          <div className="max-w-4xl mx-auto mt-10 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-slate-900 to-blue-950 text-white border border-slate-800 shadow-md">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+              <div className="space-y-1.5 max-w-xl">
+                <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-300 uppercase tracking-wider">
+                  <Headphones className="w-3.5 h-3.5" />
+                  <span>Dedicated Support & Advisors</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-bold text-white">
+                  Still have a specific question?
+                </h3>
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  Our engineering advisors and talent matching specialists are on hand to discuss your technical stack, timelines, or custom scope.
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto shrink-0">
+                <button
+                  onClick={() => onOpenHireModal()}
+                  className="px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs sm:text-sm font-bold shadow-md shadow-blue-600/30 transition-colors cursor-pointer text-center"
+                >
+                  Talk to Talent Advisor
+                </button>
+                <button
+                  onClick={() => onNavigate('about')}
+                  className="px-5 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs sm:text-sm font-semibold border border-slate-700 transition-colors cursor-pointer text-center"
+                >
+                  Contact Our Team
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 12. FINAL CTA */}
       {/* ============================================================ */}
       <section id="final-cta-section" className="py-20 lg:py-28 bg-slate-900 text-white relative overflow-hidden">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">

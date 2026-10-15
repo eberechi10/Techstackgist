@@ -7,7 +7,10 @@ export const FORMSUBMIT_ACTION = `https://formsubmit.co/${FORMSUBMIT_TOKEN}`;
 export const FORMSUBMIT_AJAX = `https://formsubmit.co/ajax/${FORMSUBMIT_TOKEN}`;
 
 export const PRIMARY_CONTACT = {
-  address: "13 Ihebi St, Awada, Onitsha, Anambra State, Nigeria",
+  address: "6 Chinyereugo Udozor ST. Awada",
+  streetAddress: "6 Chinyereugo Udozor ST. Awada",
+  location: "Onitsha, Anambra State, Nigeria",
+  fullAddress: "6 Chinyereugo Udozor ST. Awada, Onitsha, Anambra State, Nigeria",
   email: "ebetechdigitalsolutions@gmail.com",
   phone: "+234 806 391 2897",
   phoneRaw: "+2348063912897"

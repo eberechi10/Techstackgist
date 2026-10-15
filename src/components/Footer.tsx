@@ -2,18 +2,9 @@ import React from 'react';
 import { PageId } from '../types';
 import { 
   ArrowUpRight, 
-  Mail, 
-  MapPin, 
-  Phone,
-  Globe, 
-  ShieldCheck, 
-  CheckCircle2, 
-  Linkedin, 
-  Twitter, 
-  Github,
-  Sparkles
+  ShieldCheck
 } from 'lucide-react';
-import { PRIMARY_CONTACT } from '../utils/email';
+import { NewsletterSubscription } from './NewsletterSubscription';
 
 interface FooterProps {
   onNavigate: (page: PageId) => void;
@@ -30,6 +21,11 @@ export const Footer: React.FC<FooterProps> = ({
     <footer id="main-footer" className="bg-slate-950 text-slate-300 border-t border-slate-900 pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
+        {/* Newsletter Subscription Component */}
+        <div className="mb-14">
+          <NewsletterSubscription />
+        </div>
+
         {/* Top summary brand block */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-12 border-b border-slate-800/80">
           
@@ -147,7 +143,7 @@ export const Footer: React.FC<FooterProps> = ({
             {/* Quick Actions & Navigation */}
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">
-                Engage
+                Engage & Learn
               </h4>
               <ul className="space-y-2.5 text-sm">
                 <li>
@@ -160,10 +156,10 @@ export const Footer: React.FC<FooterProps> = ({
                 </li>
                 <li>
                   <button 
-                    onClick={() => { onNavigate('contact'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    onClick={() => { onNavigate('about'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                     className="hover:text-white transition-colors cursor-pointer text-left"
                   >
-                    Send Direct Inquiry
+                    About Us & Mission
                   </button>
                 </li>
                 <li>
@@ -171,76 +167,32 @@ export const Footer: React.FC<FooterProps> = ({
                     onClick={() => { onNavigate('about'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                     className="hover:text-white transition-colors cursor-pointer text-left"
                   >
-                    About Our Mission
+                    Contact & Headquarters
                   </button>
                 </li>
                 <li>
-                  <a 
-                    href={`mailto:${PRIMARY_CONTACT.email}`} 
-                    className="hover:text-white transition-colors text-xs text-blue-400 block pt-1"
+                  <button 
+                    onClick={() => {
+                      onNavigate('home');
+                      setTimeout(() => {
+                        const el = document.getElementById('faq-section');
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      }, 100);
+                    }}
+                    className="hover:text-white transition-colors cursor-pointer text-left"
                   >
-                    {PRIMARY_CONTACT.email}
-                  </a>
+                    Frequently Asked Questions
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    onClick={() => { onNavigate('talent'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    className="hover:text-white transition-colors cursor-pointer text-left"
+                  >
+                    Explore Talent Network
+                  </button>
                 </li>
               </ul>
-            </div>
-
-          </div>
-        </div>
-
-        {/* Dedicated Contacts Strip at the bottom */}
-        <div id="footer-contacts" className="py-8 border-b border-slate-800/80">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            {/* Address */}
-            <div className="flex items-start gap-3 bg-slate-900/90 p-4 rounded-xl border border-slate-800">
-              <div className="w-9 h-9 rounded-lg bg-blue-900/50 text-blue-400 flex items-center justify-center shrink-0 mt-0.5">
-                <MapPin className="w-4 h-4" />
-              </div>
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-0.5">
-                  Office Location
-                </span>
-                <p className="text-sm font-medium text-white leading-snug">
-                  {PRIMARY_CONTACT.address}
-                </p>
-              </div>
-            </div>
-
-            {/* Email */}
-            <div className="flex items-start gap-3 bg-slate-900/90 p-4 rounded-xl border border-slate-800">
-              <div className="w-9 h-9 rounded-lg bg-blue-900/50 text-blue-400 flex items-center justify-center shrink-0 mt-0.5">
-                <Mail className="w-4 h-4" />
-              </div>
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-0.5">
-                  Email Address
-                </span>
-                <a 
-                  href={`mailto:${PRIMARY_CONTACT.email}`}
-                  className="text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors break-all"
-                >
-                  {PRIMARY_CONTACT.email}
-                </a>
-              </div>
-            </div>
-
-            {/* Phone */}
-            <div className="flex items-start gap-3 bg-slate-900/90 p-4 rounded-xl border border-slate-800">
-              <div className="w-9 h-9 rounded-lg bg-emerald-900/40 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
-                <Phone className="w-4 h-4" />
-              </div>
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-0.5">
-                  Phone & WhatsApp
-                </span>
-                <a 
-                  href={`tel:${PRIMARY_CONTACT.phoneRaw}`}
-                  className="text-sm font-medium text-white hover:text-emerald-400 transition-colors"
-                >
-                  {PRIMARY_CONTACT.phone}
-                </a>
-              </div>
             </div>
 
           </div>
@@ -249,7 +201,7 @@ export const Footer: React.FC<FooterProps> = ({
         {/* Bottom copyright and legal */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div className="flex items-center gap-2">
-            <span>© {new Date().getFullYear()} Techstackgist Technologies. All rights reserved.</span>
+            <span>© {new Date().getFullYear()} Techstackgist Hub. All rights reserved.</span>
           </div>
           
           <div className="flex items-center gap-6">

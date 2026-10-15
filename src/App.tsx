@@ -10,32 +10,39 @@ import { ProductsPage } from './pages/ProductsPage';
 import { CompaniesPage } from './pages/CompaniesPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
-
-import { TalentDetailModal } from './components/modals/TalentDetailModal';
-import { HireTalentModal } from './components/modals/HireTalentModal';
-import { StartProjectModal } from './components/modals/StartProjectModal';
-import { CourseEnrollModal } from './components/modals/CourseEnrollModal';
+import { HirePage } from './pages/HirePage';
+import { StartProjectPage } from './pages/StartProjectPage';
+import { CourseEnrollPage } from './pages/CourseEnrollPage';
+import { TalentProfilePage } from './pages/TalentProfilePage';
 
 export default function App() {
   // Manage current view with URL route synchronization
   const [currentPage, setCurrentPage] = useState<PageId>('home');
 
-  // Modal States
+  // Contextual Data States for dedicated action pages
   const [selectedTalentForDetail, setSelectedTalentForDetail] = useState<TalentProfile | null>(null);
-  const [hireModalOpen, setHireModalOpen] = useState(false);
   const [preselectedTalentForHire, setPreselectedTalentForHire] = useState<TalentProfile | null>(null);
-  
-  const [startProjectOpen, setStartProjectOpen] = useState(false);
   const [selectedServiceForProject, setSelectedServiceForProject] = useState<ServiceItem | null>(null);
-
-  const [courseEnrollOpen, setCourseEnrollOpen] = useState(false);
   const [selectedCourseForEnroll, setSelectedCourseForEnroll] = useState<Course | null>(null);
 
-  // Parse path on mount
+  // Parse path on mount and browser navigation
   useEffect(() => {
     const handleLocationChange = () => {
       const path = window.location.pathname.replace('/', '') as PageId;
-      const validPages: PageId[] = ['home', 'products', 'services', 'academy', 'talent', 'companies', 'about', 'contact'];
+      const validPages: PageId[] = [
+        'home', 
+        'products', 
+        'services', 
+        'academy', 
+        'talent', 
+        'companies', 
+        'about', 
+        'contact',
+        'hire',
+        'start-project',
+        'enroll',
+        'talent-profile'
+      ];
       if (validPages.includes(path)) {
         setCurrentPage(path);
       } else {
@@ -55,23 +62,24 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const openHireModal = (talent?: TalentProfile) => {
-    if (talent) {
-      setPreselectedTalentForHire(talent);
-    } else {
-      setPreselectedTalentForHire(null);
-    }
-    setHireModalOpen(true);
+  const handleOpenHire = (talent?: TalentProfile) => {
+    setPreselectedTalentForHire(talent || null);
+    navigateTo('hire');
   };
 
-  const openStartProject = (service?: ServiceItem) => {
+  const handleOpenStartProject = (service?: ServiceItem) => {
     setSelectedServiceForProject(service || null);
-    setStartProjectOpen(true);
+    navigateTo('start-project');
   };
 
-  const openCourseEnroll = (course: Course) => {
+  const handleOpenCourseEnroll = (course: Course) => {
     setSelectedCourseForEnroll(course);
-    setCourseEnrollOpen(true);
+    navigateTo('enroll');
+  };
+
+  const handleOpenTalentDetail = (talent: TalentProfile) => {
+    setSelectedTalentForDetail(talent);
+    navigateTo('talent-profile');
   };
 
   return (
@@ -81,7 +89,7 @@ export default function App() {
       <Navbar
         currentPage={currentPage}
         onNavigate={navigateTo}
-        onOpenHireModal={() => openHireModal()}
+        onOpenHireModal={() => handleOpenHire()}
         onOpenTalentExplore={() => navigateTo('talent')}
       />
 
@@ -90,29 +98,29 @@ export default function App() {
         {currentPage === 'home' && (
           <HomePage
             onNavigate={navigateTo}
-            onOpenHireModal={openHireModal}
-            onOpenTalentDetail={(talent) => setSelectedTalentForDetail(talent)}
-            onOpenStartProject={openStartProject}
-            onOpenCourseEnroll={openCourseEnroll}
+            onOpenHireModal={handleOpenHire}
+            onOpenTalentDetail={handleOpenTalentDetail}
+            onOpenStartProject={handleOpenStartProject}
+            onOpenCourseEnroll={handleOpenCourseEnroll}
           />
         )}
 
         {currentPage === 'talent' && (
           <TalentPage
-            onOpenHireModal={openHireModal}
-            onOpenTalentDetail={(talent) => setSelectedTalentForDetail(talent)}
+            onOpenHireModal={handleOpenHire}
+            onOpenTalentDetail={handleOpenTalentDetail}
           />
         )}
 
         {currentPage === 'academy' && (
           <AcademyPage
-            onOpenCourseEnroll={openCourseEnroll}
+            onOpenCourseEnroll={handleOpenCourseEnroll}
           />
         )}
 
         {currentPage === 'services' && (
           <ServicesPage
-            onOpenStartProject={openStartProject}
+            onOpenStartProject={handleOpenStartProject}
           />
         )}
 
@@ -122,63 +130,58 @@ export default function App() {
 
         {currentPage === 'companies' && (
           <CompaniesPage
-            onOpenHireModal={() => openHireModal()}
+            onOpenHireModal={() => handleOpenHire()}
           />
         )}
 
         {currentPage === 'about' && (
           <AboutPage
             onNavigate={navigateTo}
-            onOpenHireModal={() => openHireModal()}
+            onOpenHireModal={() => handleOpenHire()}
           />
         )}
 
         {currentPage === 'contact' && (
           <ContactPage />
         )}
+
+        {/* Dedicated Action Pages (Replaced modals with dedicated full-page routes) */}
+        {currentPage === 'hire' && (
+          <HirePage
+            onNavigate={navigateTo}
+            preselectedTalent={preselectedTalentForHire}
+            onClearPreselectedTalent={() => setPreselectedTalentForHire(null)}
+          />
+        )}
+
+        {currentPage === 'start-project' && (
+          <StartProjectPage
+            onNavigate={navigateTo}
+            selectedService={selectedServiceForProject}
+          />
+        )}
+
+        {currentPage === 'enroll' && (
+          <CourseEnrollPage
+            onNavigate={navigateTo}
+            selectedCourse={selectedCourseForEnroll}
+          />
+        )}
+
+        {currentPage === 'talent-profile' && (
+          <TalentProfilePage
+            talent={selectedTalentForDetail}
+            onNavigate={navigateTo}
+            onHireTalent={(talent) => handleOpenHire(talent)}
+          />
+        )}
       </main>
 
       {/* Persistent Global Footer */}
       <Footer
         onNavigate={navigateTo}
-        onOpenHireModal={() => openHireModal()}
+        onOpenHireModal={() => handleOpenHire()}
         onOpenTalentExplore={() => navigateTo('talent')}
-      />
-
-      {/* Interactive Modals */}
-      <TalentDetailModal
-        talent={selectedTalentForDetail}
-        onClose={() => setSelectedTalentForDetail(null)}
-        onRequestInterview={(talent) => {
-          setSelectedTalentForDetail(null);
-          openHireModal(talent);
-        }}
-      />
-
-      <HireTalentModal
-        isOpen={hireModalOpen}
-        onClose={() => {
-          setHireModalOpen(false);
-          setPreselectedTalentForHire(null);
-        }}
-        preselectedTalent={preselectedTalentForHire}
-      />
-
-      <StartProjectModal
-        isOpen={startProjectOpen}
-        onClose={() => {
-          setStartProjectOpen(false);
-          setSelectedServiceForProject(null);
-        }}
-        selectedService={selectedServiceForProject}
-      />
-
-      <CourseEnrollModal
-        course={selectedCourseForEnroll}
-        onClose={() => {
-          setCourseEnrollOpen(false);
-          setSelectedCourseForEnroll(null);
-        }}
       />
 
     </div>

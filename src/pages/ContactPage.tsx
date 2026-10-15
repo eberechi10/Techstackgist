@@ -257,8 +257,11 @@ export const ContactPage: React.FC = () => {
                     <span className="text-slate-400 block mb-0.5 font-bold uppercase tracking-wider text-[10px]">
                       Physical Address:
                     </span>
-                    <span className="text-white font-medium leading-relaxed">
+                    <span className="text-white font-medium leading-relaxed block">
                       {PRIMARY_CONTACT.address}
+                    </span>
+                    <span className="text-slate-400 text-xs block">
+                      {PRIMARY_CONTACT.location}
                     </span>
                   </div>
                 </div>
