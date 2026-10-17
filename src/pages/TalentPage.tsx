@@ -25,7 +25,7 @@ export const TalentPage: React.FC<TalentPageProps> = ({
   onOpenTalentDetail
 }) => {
   useSEO({
-    title: 'Hire Top African Tech Talent | Vetted Remote Engineers – Techstackgist',
+    title: 'Hire Top African Tech Talent | Techstackgist',
     description: 'Discover and hire pre-vetted African software engineers, AI developers, DevOps specialists, and UI/UX designers ready to integrate with global teams.',
     canonicalPath: '/talent',
     keywords: ['hire African engineers', 'remote software developers Africa', 'vetted tech talent', 'African UI/UX designers', 'AI engineers Africa']
@@ -70,7 +70,7 @@ export const TalentPage: React.FC<TalentPageProps> = ({
   }, [searchQuery, selectedCategory, selectedCountry, onlyAvailable]);
 
   return (
-    <div id="talent-page-container" className="pt-28 pb-20 w-full">
+    <div id="talent-page-container" className="pt-28 pb-20 w-full bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Page Header */}
@@ -80,7 +80,7 @@ export const TalentPage: React.FC<TalentPageProps> = ({
             Vetted African Tech Talent Pool
           </div>
           <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            Screened engineering, design & data professionals ready to build.
+            Hire Pre-Vetted African Tech Talent with Techstackgist
           </h1>
           <p className="text-base text-slate-600 mt-3 leading-relaxed">
             Every candidate in our network has undergone code quality audits, real-world project defenses, and timezone collaboration verification. Hire full-time remote or fractional specialists in &lt; 48 hours.
@@ -271,7 +271,7 @@ export const TalentPage: React.FC<TalentPageProps> = ({
         )}
 
         {/* Global Hiring Value Strip */}
-        <div className="mt-14 p-8 rounded-2xl bg-slate-900 text-white grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="mt-14 p-8 sm:p-10 rounded-2xl bg-slate-900 text-white grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           <div>
             <div className="text-blue-400 font-mono text-sm font-bold mb-1">01 / SCREENING</div>
             <h4 className="font-bold text-white mb-1">Top 3% Technical Filter</h4>
@@ -294,6 +294,48 @@ export const TalentPage: React.FC<TalentPageProps> = ({
             <p className="text-xs text-slate-400 leading-relaxed">
               Work with talent via standardized international contractor agreements or direct full-time payroll with localized tax compliance.
             </p>
+          </div>
+        </div>
+
+        {/* Talent Directory FAQ Accordion */}
+        <div className="bg-white rounded-2xl border border-slate-200 p-8 sm:p-10 mb-16 shadow-2xs">
+          <div className="max-w-3xl mb-8">
+            <h2 className="text-2xl font-bold text-slate-900 mb-1">
+              Frequently Asked Questions About Hiring African Tech Talent
+            </h2>
+            <p className="text-xs text-slate-600">
+              Clear information on trial periods, contracts, English proficiency, and onboarding.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-5 rounded-xl bg-slate-50 border border-slate-200">
+              <h3 className="font-bold text-sm text-slate-900 mb-2">How fast can an engineer start after selection?</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Candidates marked as &quot;Available&quot; can complete onboarding, sign mutual NDAs, and begin work inside your Slack and GitHub repos within 48 to 72 hours.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-xl bg-slate-50 border border-slate-200">
+              <h3 className="font-bold text-sm text-slate-900 mb-2">What is the English proficiency of candidates?</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                English is the official language of government, higher education, and corporate business across Nigeria, Ghana, Kenya, and South Africa. All candidates have verified native or bilingual fluency.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-xl bg-slate-50 border border-slate-200">
+              <h3 className="font-bold text-sm text-slate-900 mb-2">Is there a satisfaction guarantee?</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Yes. Every placement comes with a 14-day risk-free trial. If the talent does not exceed expectations, you owe nothing or we provide an immediate alternative candidate.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-xl bg-slate-50 border border-slate-200">
+              <h3 className="font-bold text-sm text-slate-900 mb-2">How do billing and payment work?</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Companies receive one transparent monthly invoice in USD, EUR, or GBP payable via credit card or ACH/wire transfer. Techstackgist manages all local payouts and currency conversions.
+              </p>
+            </div>
           </div>
         </div>
 

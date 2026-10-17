@@ -62,7 +62,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   onOpenCourseEnroll
 }) => {
   useSEO({
-    title: 'Techstackgist – African Technology Platform | Skills, Solutions & Talent',
+    title: 'Techstackgist | African Tech Talent, Academy & Solutions',
     description: 'Techstackgist connects people and businesses with digital products, professional services, practical training, and vetted African tech talent.',
     canonicalPath: '/',
     keywords: ['African tech platform', 'hire African engineers', 'software solutions Nigeria', 'tech training Africa', 'remote developers']

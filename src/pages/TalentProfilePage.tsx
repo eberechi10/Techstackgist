@@ -13,8 +13,14 @@ import {
   Languages,
   ArrowLeft,
   ArrowRight,
-  ExternalLink
+  ExternalLink,
+  Wifi,
+  BatteryCharging,
+  Cpu,
+  Award,
+  Check
 } from 'lucide-react';
+import { PRIMARY_CONTACT } from '../utils/email';
 
 interface TalentProfilePageProps {
   talent: TalentProfile | null;
@@ -29,8 +35,8 @@ export const TalentProfilePage: React.FC<TalentProfilePageProps> = ({
 }) => {
   useSEO({
     title: talent 
-      ? `${talent.name} – ${talent.role} | Techstackgist Talent`
-      : 'Vetted Tech Professional Profile – Techstackgist',
+      ? `${talent.name} – ${talent.role} | Techstackgist`
+      : 'Vetted Tech Professional Profile | Techstackgist',
     description: talent?.bio || 'Top 3% African technical professional vetted for production-grade engineering.',
     canonicalPath: '/talent-profile'
   });
@@ -80,7 +86,9 @@ export const TalentProfilePage: React.FC<TalentProfilePageProps> = ({
               />
               <div>
                 <div className="flex items-center gap-2.5 flex-wrap">
-                  <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">{talent.name}</h1>
+                  <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                    {talent.name} – {talent.role}
+                  </h1>
                   <span className="text-2xl">{talent.flag}</span>
                   <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-700 text-emerald-300">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -88,7 +96,7 @@ export const TalentProfilePage: React.FC<TalentProfilePageProps> = ({
                   </span>
                 </div>
                 
-                <p className="text-blue-400 font-semibold text-base sm:text-lg mt-1">{talent.role}</p>
+                <p className="text-blue-400 font-semibold text-base sm:text-lg mt-1">{talent.role} · Vetted by Techstackgist</p>
 
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 mt-2.5 text-xs text-slate-300">
                   <div className="flex items-center gap-1.5">
@@ -103,7 +111,7 @@ export const TalentProfilePage: React.FC<TalentProfilePageProps> = ({
                   <span className="text-slate-600">·</span>
                   <div className="flex items-center gap-1.5">
                     <Briefcase className="w-3.5 h-3.5 text-slate-400" />
-                    <span>{talent.experienceYears} Years Exp</span>
+                    <span>{talent.experienceYears} Years Experience</span>
                   </div>
                 </div>
               </div>
@@ -137,11 +145,21 @@ export const TalentProfilePage: React.FC<TalentProfilePageProps> = ({
             <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs">
               <h2 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
                 <ShieldCheck className="w-5 h-5 text-blue-600" />
-                <span>Executive Summary & Philosophy</span>
+                <span>Executive Summary &amp; Engineering Philosophy</span>
               </h2>
               <p className="text-slate-700 leading-relaxed text-sm sm:text-base">
                 {talent.bio}
               </p>
+              <div className="mt-4 pt-4 border-t border-slate-100 flex flex-wrap gap-4 text-xs text-slate-600">
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  <span>Available for 40 hrs/week full-time contracts</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  <span>Direct GitHub, Jira &amp; Slack integration</span>
+                </div>
+              </div>
             </div>
 
             {/* Featured Projects */}
@@ -174,6 +192,33 @@ export const TalentProfilePage: React.FC<TalentProfilePageProps> = ({
               </div>
             </div>
 
+            {/* Remote Work Setup & Reliability Infrastructure */}
+            <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs">
+              <h2 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <Wifi className="w-5 h-5 text-blue-600" />
+                <span>Hardware, Network &amp; Reliability Infrastructure</span>
+              </h2>
+              <p className="text-xs text-slate-600 mb-4 leading-relaxed">
+                Techstackgist enforces mandatory remote setup standards for all active talent to ensure uninterrupted global collaboration:
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                  <div className="font-bold text-slate-900 flex items-center gap-1.5 mb-1">
+                    <Wifi className="w-3.5 h-3.5 text-blue-600" />
+                    <span>Fiber High-Speed Internet</span>
+                  </div>
+                  <span className="text-slate-600">Dual primary + 4G LTE backup connections (50+ Mbps down/up).</span>
+                </div>
+                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                  <div className="font-bold text-slate-900 flex items-center gap-1.5 mb-1">
+                    <BatteryCharging className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Inverter / Solar Power Backup</span>
+                  </div>
+                  <span className="text-slate-600">Continuous 8+ hour battery backup ensuring zero power downtime.</span>
+                </div>
+              </div>
+            </div>
+
           </div>
 
           {/* Right Column: Vetting & Skills */}
@@ -189,15 +234,19 @@ export const TalentProfilePage: React.FC<TalentProfilePageProps> = ({
                 <span className="text-4xl font-extrabold text-white">{talent.vettingScore}%</span>
                 <span className="text-xs text-blue-300">Overall Benchmark</span>
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <p className="text-xs text-slate-300 leading-relaxed mb-3">
                 Evaluated through algorithmic code screening, real-world system architecture, live pair programming, and professional communication standards.
               </p>
+              <div className="text-[11px] text-blue-200 border-t border-blue-800/60 pt-2 flex items-center gap-1">
+                <Check className="w-3 h-3 text-emerald-400" />
+                <span>Verified by Techstackgist Engineering Board</span>
+              </div>
             </div>
 
             {/* Skills & Stack */}
             <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs">
               <h3 className="text-sm font-bold uppercase tracking-wider text-slate-700 mb-3">
-                Core Competencies
+                Core Competencies &amp; Tools
               </h3>
               <div className="flex flex-wrap gap-2">
                 {talent.skills.map((skill, sIdx) => (
@@ -216,7 +265,7 @@ export const TalentProfilePage: React.FC<TalentProfilePageProps> = ({
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-1 flex items-center gap-1.5">
                   <GraduationCap className="w-4 h-4 text-slate-600" />
-                  <span>Education & Certification</span>
+                  <span>Education &amp; Certification</span>
                 </span>
                 <span className="text-sm font-semibold text-slate-800">{talent.educationOrCert}</span>
               </div>
@@ -230,11 +279,11 @@ export const TalentProfilePage: React.FC<TalentProfilePageProps> = ({
               </div>
             </div>
 
-            {/* Hire Action Card */}
+            {/* Hire Action Card with 14-day trial */}
             <div className="bg-white rounded-2xl border-2 border-blue-600 p-6 shadow-md text-center">
-              <h4 className="text-base font-bold text-slate-900 mb-1">Ready to scale your team?</h4>
-              <p className="text-xs text-slate-600 mb-4">
-                Schedule a zero-risk 14-day candidate trial or conduct an interview.
+              <h4 className="text-base font-bold text-slate-900 mb-1">14-Day Risk-Free Trial</h4>
+              <p className="text-xs text-slate-600 mb-4 leading-relaxed">
+                Work directly with {talent.name} for two weeks. If you are not completely satisfied, you owe nothing.
               </p>
               <button
                 onClick={() => onHireTalent(talent)}
@@ -243,6 +292,9 @@ export const TalentProfilePage: React.FC<TalentProfilePageProps> = ({
                 <span>Hire {talent.name}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
+              <span className="text-[11px] text-slate-400 block mt-2">
+                Need more info? Contact {PRIMARY_CONTACT.supportEmail}
+              </span>
             </div>
 
           </div>

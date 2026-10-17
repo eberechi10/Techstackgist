@@ -12,8 +12,15 @@ import {
   Layers, 
   Sparkles,
   Calculator,
-  ArrowUpRight
+  ArrowUpRight,
+  GitBranch,
+  Rocket,
+  Search,
+  Lock,
+  Globe,
+  HelpCircle
 } from 'lucide-react';
+import { PRIMARY_CONTACT } from '../utils/email';
 
 interface ServicesPageProps {
   onOpenStartProject: (service?: ServiceItem) => void;
@@ -21,8 +28,8 @@ interface ServicesPageProps {
 
 export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenStartProject }) => {
   useSEO({
-    title: 'Enterprise Software Solutions & Product Engineering | Techstackgist',
-    description: 'End-to-end product engineering, cloud migrations, AI integrations, and digital transformation services delivered by high-caliber African engineering teams.',
+    title: 'Software Engineering Services | Techstackgist',
+    description: 'End-to-end product engineering, cloud migrations, AI integrations, and digital transformation delivered by high-caliber African engineering squads.',
     canonicalPath: '/services',
     keywords: ['software development Africa', 'custom web applications', 'cloud migrations Nigeria', 'AI integration services', 'dedicated engineering teams']
   });
@@ -50,20 +57,20 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenStartProject }
   };
 
   return (
-    <div id="services-page-container" className="pt-28 pb-20 w-full">
+    <div id="services-page-container" className="pt-28 pb-20 w-full bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="max-w-3xl mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-bold mb-3">
             <Code2 className="w-3.5 h-3.5" />
-            Engineering & Product Services
+            Engineering &amp; Product Services
           </div>
           <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            Need technology? We build it.
+            Enterprise Software Solutions &amp; Product Engineering by Techstackgist
           </h1>
-          <p className="text-base sm:text-lg text-slate-600 mt-3 leading-relaxed">
-            Techstackgist assembles high-caliber product designers, frontend and backend engineers, data architects, and cybersecurity specialists to deliver production software on schedule.
+          <p className="text-base sm:text-lg text-slate-600 mt-4 leading-relaxed">
+            Techstackgist assembles high-caliber product designers, frontend and backend engineers, cloud architects, and cybersecurity specialists to build and ship production software on schedule. From MVPs to enterprise migrations, our dedicated teams deliver clean, scalable code.
           </p>
         </div>
 
@@ -133,16 +140,70 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenStartProject }
           ))}
         </div>
 
+        {/* Engineering Methodology Section */}
+        <div className="bg-white rounded-2xl border border-slate-200 p-8 sm:p-12 mb-16 shadow-2xs">
+          <div className="max-w-3xl mb-8">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-3 tracking-tight">
+              Our 4-Stage Agile Delivery Framework
+            </h2>
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              We eliminate guesswork with a battle-tested sprint lifecycle that guarantees transparency, predictable velocity, and uncompromising quality assurance.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div className="p-5 rounded-xl bg-slate-50 border border-slate-200">
+              <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs mb-3">
+                01
+              </div>
+              <h3 className="font-bold text-sm text-slate-900 mb-1">Architecture Discovery</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Technical feasibility study, entity relationship modeling, API contract definitions, and timeline estimation.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-xl bg-slate-50 border border-slate-200">
+              <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs mb-3">
+                02
+              </div>
+              <h3 className="font-bold text-sm text-slate-900 mb-1">Sprint Execution</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                2-week bi-weekly sprints with staging builds, automated tests, and asynchronous Loom demos for immediate stakeholder feedback.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-xl bg-slate-50 border border-slate-200">
+              <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs mb-3">
+                03
+              </div>
+              <h3 className="font-bold text-sm text-slate-900 mb-1">Security &amp; QA Review</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Rigorous penetration testing, OWASP compliance verification, cross-browser audits, and load testing prior to release.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-xl bg-slate-50 border border-slate-200">
+              <div className="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs mb-3">
+                04
+              </div>
+              <h3 className="font-bold text-sm text-slate-900 mb-1">Handover &amp; Warranty</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Complete IP transfer, clean GitHub repos, CI/CD configuration, and a 30-day post-launch warranty with zero defect guarantee.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Interactive Scope & Estimate Calculator */}
-        <div className="p-8 rounded-2xl bg-slate-900 text-white border border-slate-800">
+        <div className="p-8 sm:p-10 rounded-2xl bg-slate-900 text-white border border-slate-800 mb-16">
           <div className="max-w-3xl mb-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950 border border-blue-800 text-blue-300 text-xs font-semibold mb-2">
               <Calculator className="w-3.5 h-3.5" />
               Interactive Delivery Estimator
             </div>
-            <h3 className="text-2xl font-bold text-white">
+            <h2 className="text-2xl font-bold text-white">
               Estimate your custom engineering project
-            </h3>
+            </h2>
             <p className="text-xs text-slate-400 mt-1">
               Select your required capabilities and squad formation to preview target budget and delivery timelines.
             </p>
@@ -248,6 +309,52 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenStartProject }
               </button>
             </div>
 
+          </div>
+        </div>
+
+        {/* Services FAQ Accordion */}
+        <div className="bg-white rounded-2xl border border-slate-200 p-8 sm:p-10 mb-16 shadow-2xs">
+          <div className="max-w-3xl mb-8">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-800 text-xs font-semibold mb-2">
+              <HelpCircle className="w-3.5 h-3.5" />
+              Frequently Asked Questions
+            </div>
+            <h2 className="text-2xl font-bold text-slate-900">
+              Common questions about working with Techstackgist
+            </h2>
+            <p className="text-xs text-slate-600 mt-1">
+              Transparent terms, legal protections, and clear engineering standards.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-5 rounded-xl bg-slate-50 border border-slate-200">
+              <h3 className="font-bold text-sm text-slate-900 mb-2">Who owns the intellectual property and code?</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                You retain 100% ownership of all source code, design assets, and architectural documents upon milestone completion, backed by international IP assignment agreements.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-xl bg-slate-50 border border-slate-200">
+              <h3 className="font-bold text-sm text-slate-900 mb-2">What happens after the project launches?</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Every project includes our 30-day post-launch warranty where our engineers resolve any critical bugs at no additional cost. We also provide ongoing maintenance retainers.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-xl bg-slate-50 border border-slate-200">
+              <h3 className="font-bold text-sm text-slate-900 mb-2">How fast can an engineering squad start?</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Following technical discovery and scope sign-off, our dedicated engineering squads can typically mobilize and begin sprint 1 within 5 to 7 business days.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-xl bg-slate-50 border border-slate-200">
+              <h3 className="font-bold text-sm text-slate-900 mb-2">How do we communicate throughout the project?</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                We integrate directly into your workflow via shared Slack channels, GitHub/GitLab repositories, weekly sprint video demos, and daily asynchronous standups.
+              </p>
+            </div>
           </div>
         </div>
 
