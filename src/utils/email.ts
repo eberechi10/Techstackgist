@@ -1,5 +1,5 @@
 /**
- * Primary contacts and email dispatch utility for Techstackgist / Ebetech
+ * Primary contacts and email dispatch utility for Techstackgist
  */
 
 export const FORMSUBMIT_TOKEN = "6bccffb064c8a0b8a30d209ca84461e6";
@@ -11,7 +11,9 @@ export const PRIMARY_CONTACT = {
   streetAddress: "6 Chinyereugo Udozor ST. Awada",
   location: "Onitsha, Anambra State, Nigeria",
   fullAddress: "6 Chinyereugo Udozor ST. Awada, Onitsha, Anambra State, Nigeria",
-  email: "ebetechdigitalsolutions@gmail.com",
+  email: "support@techstackgist.com",
+  supportEmail: "support@techstackgist.com",
+  adminEmail: "admin@techstackgist.com",
   phone: "+234 806 391 2897",
   phoneRaw: "+2348063912897"
 };
@@ -33,7 +35,7 @@ export interface SendEmailResult {
 }
 
 /**
- * Sends form data via direct HTTP POST to FormSubmit gateway targeting ebetechdigitalsolutions@gmail.com
+ * Sends form data via direct HTTP POST to FormSubmit gateway targeting support@techstackgist.com & admin@techstackgist.com
  */
 export async function submitEmailForm({
   name,
@@ -55,11 +57,11 @@ ${message}
 ${formattedExtra ? `\nADDITIONAL SPECIFICATIONS:\n${formattedExtra}` : ''}
 
 ---
-Dispatched via Techstackgist / Ebetech Platform
-Recipient: ${PRIMARY_CONTACT.email}`;
+Dispatched via Techstackgist Platform
+Primary Contact: ${PRIMARY_CONTACT.supportEmail} / ${PRIMARY_CONTACT.adminEmail}`;
 
-  const mailtoUrl = `mailto:${PRIMARY_CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullBody)}`;
-  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(PRIMARY_CONTACT.email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullBody)}`;
+  const mailtoUrl = `mailto:${PRIMARY_CONTACT.supportEmail}?cc=${encodeURIComponent(PRIMARY_CONTACT.adminEmail)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullBody)}`;
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(PRIMARY_CONTACT.supportEmail)}&cc=${encodeURIComponent(PRIMARY_CONTACT.adminEmail)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullBody)}`;
 
   try {
     const postPayload = {
@@ -95,7 +97,7 @@ Recipient: ${PRIMARY_CONTACT.email}`;
       return {
         success: true,
         needsActivation: true,
-        message: "FormSubmit sent a one-time activation link to ebetechdigitalsolutions@gmail.com. Please confirm the email in your inbox to finalize direct delivery.",
+        message: "FormSubmit sent a one-time activation link to support@techstackgist.com. Please confirm the email in your inbox to finalize direct delivery.",
         mailtoUrl,
         gmailUrl
       };

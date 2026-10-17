@@ -42,7 +42,7 @@ export const ContactPage: React.FC = () => {
   };
 
   const copyDetails = () => {
-    const text = `To: ${PRIMARY_CONTACT.email}\nSubject: [TSG Inquiry] ${formData.subject} - from ${formData.name}\n\nName: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`;
+    const text = `To: ${PRIMARY_CONTACT.supportEmail}\nCC: ${PRIMARY_CONTACT.adminEmail}\nSubject: [TSG Inquiry] ${formData.subject} - from ${formData.name}\n\nName: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`;
     navigator.clipboard?.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
@@ -77,14 +77,14 @@ export const ContactPage: React.FC = () => {
                 </div>
                 <h3 className="text-xl font-bold text-slate-900">Inquiry Sent to Email</h3>
                 <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                  Thank you, <strong>{formData.name}</strong>. Your message regarding <em>{formData.subject}</em> has been dispatched directly to <strong className="text-blue-600">{PRIMARY_CONTACT.email}</strong>.
+                  Thank you, <strong>{formData.name}</strong>. Your message regarding <em>{formData.subject}</em> has been dispatched directly to <strong className="text-blue-600">{PRIMARY_CONTACT.supportEmail}</strong> &amp; <strong className="text-blue-600">{PRIMARY_CONTACT.adminEmail}</strong>.
                 </p>
 
                 {deliveryResult?.needsActivation && (
                   <div className="p-3.5 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-800 text-left max-w-md mx-auto flex items-start gap-2">
                     <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                     <div>
-                      <strong>One-Time Activation Notice:</strong> FormSubmit sent an activation email to <strong>{PRIMARY_CONTACT.email}</strong>. Please check your inbox (or spam) and click &quot;Activate Form&quot; to allow incoming messages to land automatically.
+                      <strong>One-Time Activation Notice:</strong> FormSubmit sent an activation email to <strong>{PRIMARY_CONTACT.supportEmail}</strong>. Please check your inbox (or spam) and click &quot;Activate Form&quot; to allow incoming messages to land automatically.
                     </div>
                   </div>
                 )}
@@ -95,7 +95,8 @@ export const ContactPage: React.FC = () => {
                     Direct Delivery Details:
                   </div>
                   <div className="text-slate-600">
-                    <div>• Recipient: <strong>{PRIMARY_CONTACT.email}</strong></div>
+                    <div>• Support: <strong>{PRIMARY_CONTACT.supportEmail}</strong></div>
+                    <div>• Admin: <strong>{PRIMARY_CONTACT.adminEmail}</strong></div>
                     <div>• Sender: <strong>{formData.email}</strong></div>
                     <div>• Phone Support: <strong>{PRIMARY_CONTACT.phone}</strong></div>
                   </div>
@@ -149,7 +150,7 @@ export const ContactPage: React.FC = () => {
                     Send a Direct Inquiry
                   </h3>
                   <span className="text-[11px] text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md font-medium">
-                    Sends to {PRIMARY_CONTACT.email}
+                    Sends to {PRIMARY_CONTACT.supportEmail}
                   </span>
                 </div>
 
@@ -216,7 +217,7 @@ export const ContactPage: React.FC = () => {
 
                 <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
                   <span className="text-xs text-slate-500">
-                    Direct delivery to {PRIMARY_CONTACT.email}
+                    Direct delivery to {PRIMARY_CONTACT.supportEmail} &amp; {PRIMARY_CONTACT.adminEmail}
                   </span>
                   <button
                     type="submit"
@@ -268,16 +269,29 @@ export const ContactPage: React.FC = () => {
 
                 <div className="flex items-start gap-3">
                   <Mail className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
-                  <div>
-                    <span className="text-slate-400 block mb-0.5 font-bold uppercase tracking-wider text-[10px]">
-                      Direct Email:
-                    </span>
-                    <a 
-                      href={`mailto:${PRIMARY_CONTACT.email}`} 
-                      className="text-blue-400 font-semibold hover:text-blue-300 transition-colors break-all"
-                    >
-                      {PRIMARY_CONTACT.email}
-                    </a>
+                  <div className="space-y-2">
+                    <div>
+                      <span className="text-slate-400 block mb-0.5 font-bold uppercase tracking-wider text-[10px]">
+                        Support & Talent:
+                      </span>
+                      <a 
+                        href={`mailto:${PRIMARY_CONTACT.supportEmail}`} 
+                        className="text-blue-400 font-semibold hover:text-blue-300 transition-colors break-all text-xs"
+                      >
+                        {PRIMARY_CONTACT.supportEmail}
+                      </a>
+                    </div>
+                    <div>
+                      <span className="text-slate-400 block mb-0.5 font-bold uppercase tracking-wider text-[10px]">
+                        Admin & Partnerships:
+                      </span>
+                      <a 
+                        href={`mailto:${PRIMARY_CONTACT.adminEmail}`} 
+                        className="text-blue-400 font-semibold hover:text-blue-300 transition-colors break-all text-xs"
+                      >
+                        {PRIMARY_CONTACT.adminEmail}
+                      </a>
+                    </div>
                   </div>
                 </div>
 

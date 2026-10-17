@@ -70,7 +70,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenHireModa
   };
 
   const copyContactSummary = () => {
-    const text = `Contact: Techstackgist Hub\nHeadquarters: ${PRIMARY_CONTACT.address}, ${PRIMARY_CONTACT.location}\nEmail: ${PRIMARY_CONTACT.email}\nPhone: ${PRIMARY_CONTACT.phone}\nInquiry: ${formData.subject}\nFrom: ${formData.name} (${formData.email})\nMessage: ${formData.message}`;
+    const text = `Contact: Techstackgist Hub\nHeadquarters: ${PRIMARY_CONTACT.address}, ${PRIMARY_CONTACT.location}\nSupport Email: ${PRIMARY_CONTACT.supportEmail}\nAdmin Email: ${PRIMARY_CONTACT.adminEmail}\nPhone: ${PRIMARY_CONTACT.phone}\nInquiry: ${formData.subject}\nFrom: ${formData.name} (${formData.email})\nMessage: ${formData.message}`;
     navigator.clipboard?.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
@@ -336,22 +336,37 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenHireModa
                 </div>
               </div>
 
-              {/* Email Card */}
+              {/* Email Cards */}
               <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 mt-0.5">
                   <Mail className="w-5 h-5" />
                 </div>
-                <div>
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block mb-1">
-                    Official Email
+                <div className="space-y-3 flex-1 min-w-0">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block">
+                    Official Email Channels
                   </span>
-                  <a 
-                    href={`mailto:${PRIMARY_CONTACT.email}`}
-                    className="text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors break-all"
-                  >
-                    {PRIMARY_CONTACT.email}
-                  </a>
-                  <p className="text-xs text-slate-500 mt-0.5">
+                  
+                  <div>
+                    <span className="text-xs text-slate-500 block font-medium">Customer Support & Talent Inquiries:</span>
+                    <a 
+                      href={`mailto:${PRIMARY_CONTACT.supportEmail}`}
+                      className="text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors break-all"
+                    >
+                      {PRIMARY_CONTACT.supportEmail}
+                    </a>
+                  </div>
+
+                  <div className="pt-2 border-t border-slate-100">
+                    <span className="text-xs text-slate-500 block font-medium">Administration & Partnerships:</span>
+                    <a 
+                      href={`mailto:${PRIMARY_CONTACT.adminEmail}`}
+                      className="text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors break-all"
+                    >
+                      {PRIMARY_CONTACT.adminEmail}
+                    </a>
+                  </div>
+
+                  <p className="text-xs text-slate-500 pt-1">
                     Fast response within 24 hours on all business inquiries
                   </p>
                 </div>
@@ -463,7 +478,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenHireModa
                       Send a Direct Message
                     </h3>
                     <p className="text-xs text-slate-500 mt-0.5">
-                      Messages are sent directly to {PRIMARY_CONTACT.email} with rapid turnarounds.
+                      Messages are sent directly to {PRIMARY_CONTACT.supportEmail} &amp; {PRIMARY_CONTACT.adminEmail} with rapid turnarounds.
                     </p>
                   </div>
 
@@ -544,8 +559,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onOpenHireModa
                     )}
                   </button>
 
-                  <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1">
-                    <span>Direct recipient: {PRIMARY_CONTACT.email}</span>
+                  <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-400 pt-1">
+                    <span>Recipients: {PRIMARY_CONTACT.supportEmail} / {PRIMARY_CONTACT.adminEmail}</span>
                     <span>Awada, Onitsha · Nigeria</span>
                   </div>
                 </form>
