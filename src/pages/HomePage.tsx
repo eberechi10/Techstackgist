@@ -359,6 +359,109 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* ============================================================ */}
+      {/* 2.5 OUR STORY & PURPOSE SECTION (NEAR-BLACK, EDITORIAL, ZERO GENERIC ICONS) */}
+      {/* ============================================================ */}
+      <section id="our-story-section" className="py-20 lg:py-28 bg-white border-b border-slate-200/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="max-w-3xl mb-14">
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-slate-500 block mb-2">
+              Our Story &amp; Purpose
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-950 tracking-tight leading-tight mb-4">
+              What is Techstackgist?
+            </h2>
+            <p className="text-lg sm:text-xl font-medium text-slate-900 leading-relaxed">
+              Techstackgist is a technology skills and opportunity ecosystem built to bridge the gap between people and the opportunities created by technology.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-14">
+            
+            {/* Left Column: Narrative paragraphs */}
+            <div className="lg:col-span-7 space-y-5 text-base sm:text-lg text-slate-800 leading-relaxed border-l-2 border-slate-950 pl-6 sm:pl-8">
+              <p>
+                We believe that access to technology should not be limited by a person&apos;s background, experience, or financial circumstances.
+              </p>
+              <p>
+                We provide accessible and affordable technology education, practical experience, tools, and pathways to real-world opportunities; helping people progress from zero to mastery.
+              </p>
+              <p className="font-semibold text-slate-950">
+                But our goal goes beyond teaching technology.
+              </p>
+              <p>
+                We want people to use what they learn to earn, create, innovate, solve problems, build businesses, and create opportunities for others.
+              </p>
+              <p>
+                We are building a pathway from learner to professional, from job seeker to job creator, and from consumer of technology to creator of solutions.
+              </p>
+            </div>
+
+            {/* Right Column: 3 Pillars (Vision, Mission, Purpose) */}
+            <div className="lg:col-span-5 space-y-4">
+              
+              <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500 block mb-1">
+                  01 / Vision
+                </span>
+                <h3 className="text-base font-bold text-slate-950 mb-2">
+                  Vision
+                </h3>
+                <p className="text-sm text-slate-800 leading-relaxed">
+                  To build a world where everyone has the opportunity to acquire valuable technology skills, create solutions, earn sustainable income, and create opportunities for others.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500 block mb-1">
+                  02 / Mission
+                </span>
+                <h3 className="text-base font-bold text-slate-950 mb-2">
+                  Mission
+                </h3>
+                <p className="text-sm text-slate-800 leading-relaxed">
+                  To make technology education, tools, and opportunities accessible, practical, and affordable, taking people from zero to mastery and connecting their skills to real-world opportunities.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-500 block mb-1">
+                  03 / Purpose
+                </span>
+                <h3 className="text-base font-bold text-slate-950 mb-2">
+                  Purpose
+                </h3>
+                <p className="text-sm text-slate-800 leading-relaxed">
+                  To bridge the technology and opportunity gap by transforming learners into skilled professionals, creators, entrepreneurs, and employers.
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* Transformation Banner & Quote */}
+          <div className="p-8 sm:p-10 rounded-2xl bg-slate-950 text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="max-w-2xl">
+              <span className="text-xs uppercase font-bold tracking-widest text-slate-400 block mb-2">
+                The Techstackgist Mandate
+              </span>
+              <p className="text-xl sm:text-2xl font-bold leading-snug text-white">
+                &ldquo;Techstackgist is about turning access into skills, skills into opportunities, and opportunities into impact.&rdquo;
+              </p>
+            </div>
+            <button
+              onClick={() => onNavigate('about')}
+              className="px-6 py-3.5 rounded-xl bg-white hover:bg-slate-100 text-slate-950 font-semibold text-sm transition-all whitespace-nowrap cursor-pointer shrink-0"
+            >
+              Read Full Story &amp; About Us &rarr;
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ============================================================ */}
       {/* 3. TALENT SECTION — MAJOR FEATURE */}
       {/* ============================================================ */}
       <section id="talent-major-section" className="py-20 lg:py-28 bg-slate-50 relative">

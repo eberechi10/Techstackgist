@@ -345,6 +345,52 @@ export const ContactPage: React.FC = () => {
 
         </div>
 
+        {/* ============================================================ */}
+        {/* Inquiry FAQs & Response Commitments */}
+        {/* ============================================================ */}
+        <div className="mt-16 pt-12 border-t border-slate-200">
+          <div className="max-w-2xl mb-8">
+            <span className="text-xs font-bold uppercase tracking-widest text-slate-500 block mb-1">
+              Communication Guidelines
+            </span>
+            <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+              Frequently Asked Contact &amp; Support Questions
+            </h2>
+            <p className="text-sm text-slate-600 mt-1">
+              What to expect when submitting an inquiry to Techstackgist engineering and talent teams.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-6 rounded-2xl bg-white border border-slate-200">
+              <h3 className="text-base font-bold text-slate-900 mb-2">
+                How fast do you respond to talent and project inquiries?
+              </h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                All business inquiries sent to our support or admin emails receive an initial human review and response within 24 hours during standard business days (Monday through Friday, 8:00 AM – 6:00 PM WAT).
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-white border border-slate-200">
+              <h3 className="text-base font-bold text-slate-900 mb-2">
+                Can we schedule an engineering discovery call?
+              </h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Yes. For custom software engineering, team augmentation, or bootcamp corporate sponsorship, mention your requirements in the message above and our lead solutions architect will coordinate a video discovery call.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-white border border-slate-200">
+              <h3 className="text-base font-bold text-slate-900 mb-2">
+                Can I visit the Techstackgist Hub in person?
+              </h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Visitors, community members, and partners are welcome at our headquarters at 6 Chinyereugo Udozor Street, Awada, Onitsha. We recommend scheduling an appointment in advance so our leadership team is available to host you.
+              </p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   );
